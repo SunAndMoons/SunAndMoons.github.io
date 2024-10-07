@@ -27,7 +27,7 @@
 <meta property="og:description" content="介绍智能指针的使用场景c++中的智能指针主要用于管理动态分配的内存，避免内存泄漏。c++11标准引入了三种主要的智能指针： std::unique_ptr、std::shared_ptr、std::weak_ptr。 1. std::unique_ptr独占所有权的智能指针，同一时间内只能有一个 unique_ptr 指向一个特定的对象，当unique_ptr被销毁时，它所指向的对象也会被销毁。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-10-06T15:16:49.000Z">
-<meta property="article:modified_time" content="2024-10-06T15:47:25.433Z">
+<meta property="article:modified_time" content="2024-10-07T09:17:56.671Z">
 <meta property="article:author" content="sunyanan">
 <meta property="article:tag" content="cpp">
 <meta name="twitter:card" content="summary_large_image">
@@ -288,7 +288,11 @@
 <h6 id="使用场景-2"><a href="#使用场景-2" class="headerlink" title="使用场景"></a>使用场景</h6><p>需要访问但不拥有有shared_ptr管理的对象时；<br>解决shared_ptr 的循环引用问题时；<br>weak_ptr 和shared_ptr 需要搭配使用</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-function">std::shared_ptr&lt;Test&gt; <span class="hljs-title">sharedPtr</span><span class="hljs-params">(<span class="hljs-keyword">new</span> Test())</span></span>;<br>    std::weak_ptr&lt;Test&gt; weakptr=sharedPtr;<br>    <span class="hljs-keyword">if</span>(<span class="hljs-keyword">auto</span> lockedsharedptr= weakptr.<span class="hljs-built_in">lock</span>())&#123;<br>        lockedsharedptr-&gt;<span class="hljs-built_in">test</span>();<br>    &#125;<br>    <span class="hljs-comment">//shared_ptr离开作用域时，指向的对象会自动销毁</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>weakptr.lock() 方法尝试从其所关联的shared_ptr创建一个实例，如果袁术的shared_ptr 仍然存在(管理的对象还没被销毁)， lock() 方法会成功返回一个指向该对象的shared_ptr。如果原始的shared_ptr已经被销毁，lock()会返回一个空的shared_ptr。</p>
-<h6 id="建议"><a href="#建议" class="headerlink" title="建议"></a>建议</h6><p>尽量使用智能指针来管理内存；<br>如果没有多个所有者共享对象的需求，建议优先使用unique_ptr管理内存，相对于 shared_ptr更轻量；<br>在使用shared_ptr时，一定要注意是否有循环引用的问题，会导致内存泄漏；</p>
+<h6 id="建议"><a href="#建议" class="headerlink" title="建议"></a>建议</h6><ol>
+<li>尽量使用智能指针来管理内存；</li>
+<li>如果没有多个所有者共享对象的需求，建议优先使用unique_ptr管理内存，相对于 shared_ptr更轻量；</li>
+<li>在使用shared_ptr时，一定要注意是否有循环引用的问题，会导致内存泄漏；</li>
+</ol>
 
                 
               </div>
