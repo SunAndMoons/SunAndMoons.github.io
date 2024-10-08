@@ -27,7 +27,7 @@
 <meta property="og:description" content="虚函数被 virtual 关键字修饰的成员函数 为什么基类的构造函数不能定义为虚函数虚函数的调用依赖于虚函数表，指向虚函数表的指针需要在构造函数中进行初始化，所以无法调用定义为虚函数的构造函数。 什么基类的析构函数需要定义为虚函数为了实现动态绑定，基类指针指向派生类对象，如果析构函数不是虚函数，那么在对象销毁时，就是调用基类的析构函数，只能销毁派生类对象中的部分数据，所以必须将析构函数定义为虚函数">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-10-08T02:07:09.000Z">
-<meta property="article:modified_time" content="2024-10-08T02:37:11.449Z">
+<meta property="article:modified_time" content="2024-10-08T02:46:35.548Z">
 <meta property="article:author" content="sunyanan">
 <meta property="article:tag" content="cpp">
 <meta name="twitter:card" content="summary_large_image">
