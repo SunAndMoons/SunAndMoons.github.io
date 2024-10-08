@@ -19,22 +19,22 @@
   <meta name="author" content="sunyanan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="c++中野指针和悬挂指针的区别两者都可能导致程序产生不可预测的行为，但有明显的区别。  野指针：一种未被初始化的指针，通常会指向一个随机的内存地址。这个地址不可控，使用可能会导致程序崩溃或者数据损坏。 悬挂指针：一个原本合法的指针，但指向的内存已被释放或重新分配。当访问此指针指向的内存时，会导致未定义行为，因为那块内存数据可能已经不是期望的数据了。 如何避免野指针   初始化指针：在声明一个指针时">
+    <meta name="description" content="C++中 单例模式（singleton pattern）是一种设计模式，确保一个类只有一个实例，并提供一个全局访问点来获取该实例。 线程安全的单例示例12345678910111213141516171819202122232425262728293031323334#include&lt;iostream&gt;#include&lt;mutex&gt;class Test&#123;publi">
 <meta property="og:type" content="article">
-<meta property="og:title" content="野指针与悬挂指针">
-<meta property="og:url" content="http://example.com/2024/10/06/%E9%87%8E%E6%8C%87%E9%92%88%E4%B8%8E%E6%82%AC%E6%8C%82%E6%8C%87%E9%92%88/index.html">
+<meta property="og:title" content="单例模式">
+<meta property="og:url" content="http://example.com/2024/10/08/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/index.html">
 <meta property="og:site_name" content="SunAndMoons">
-<meta property="og:description" content="c++中野指针和悬挂指针的区别两者都可能导致程序产生不可预测的行为，但有明显的区别。  野指针：一种未被初始化的指针，通常会指向一个随机的内存地址。这个地址不可控，使用可能会导致程序崩溃或者数据损坏。 悬挂指针：一个原本合法的指针，但指向的内存已被释放或重新分配。当访问此指针指向的内存时，会导致未定义行为，因为那块内存数据可能已经不是期望的数据了。 如何避免野指针   初始化指针：在声明一个指针时">
+<meta property="og:description" content="C++中 单例模式（singleton pattern）是一种设计模式，确保一个类只有一个实例，并提供一个全局访问点来获取该实例。 线程安全的单例示例12345678910111213141516171819202122232425262728293031323334#include&lt;iostream&gt;#include&lt;mutex&gt;class Test&#123;publi">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-10-06T15:53:06.000Z">
-<meta property="article:modified_time" content="2024-10-08T09:55:45.467Z">
+<meta property="article:published_time" content="2024-10-08T12:32:32.000Z">
+<meta property="article:modified_time" content="2024-10-08T14:06:40.616Z">
 <meta property="article:author" content="sunyanan">
-<meta property="article:tag" content="cpp">
+<meta property="article:tag" content="设计模式">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>野指针与悬挂指针 - SunAndMoons</title>
+  <title>单例模式 - SunAndMoons</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -200,7 +200,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="野指针与悬挂指针"></span>
+            <span id="subtitle" data-typed-text="单例模式"></span>
           
         </div>
 
@@ -211,8 +211,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-10-06 23:53" pubdate>
-          2024年10月6日 晚上
+        <time datetime="2024-10-08 20:32" pubdate>
+          2024年10月8日 晚上
         </time>
       </span>
     
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          285 字
+          134 字
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          3 分钟
+          2 分钟
         
       </span>
     
@@ -271,33 +271,13 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">野指针与悬挂指针</h1>
+            <h1 id="seo-header">单例模式</h1>
             
             
               <div class="markdown-body">
                 
-                <h4 id="c-中野指针和悬挂指针的区别"><a href="#c-中野指针和悬挂指针的区别" class="headerlink" title="c++中野指针和悬挂指针的区别"></a>c++中野指针和悬挂指针的区别</h4><p>两者都可能导致程序产生不可预测的行为，但有明显的区别。</p>
-<ol>
-<li>野指针：一种未被初始化的指针，通常会指向一个随机的内存地址。这个地址不可控，使用可能会导致程序崩溃或者数据损坏。</li>
-<li>悬挂指针：一个原本合法的指针，但指向的内存已被释放或重新分配。当访问此指针指向的内存时，会导致未定义行为，因为那块内存数据可能已经不是期望的数据了。</li>
-<li>如何避免野指针</li>
-</ol>
-<ul>
-<li>初始化指针：在声明一个指针时，立刻初始化</li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-type">int</span> *ptr=<span class="hljs-literal">nullptr</span>;<br></code></pre></td></tr></table></figure>
-
-<ul>
-<li>使用智能指针：c++智能指针可以帮助自动管理指针的生命周期，减少手动管理的错误。</li>
-</ul>
-<ol start="4">
-<li>如何避免悬挂指针</li>
-</ol>
-<ul>
-<li>在删除对象后，将指针设置为nullptr,确保指针不再指向已经释放的内存。</li>
-<li>尽量使用智能指针，会自动处理指针的生命周期，减少悬挂指针的产生。</li>
-</ul>
-
+                <p>C++中 单例模式（singleton pattern）是一种设计模式，确保一个类只有一个实例，并提供一个全局访问点来获取该实例。</p>
+<h4 id="线程安全的单例示例"><a href="#线程安全的单例示例" class="headerlink" title="线程安全的单例示例"></a>线程安全的单例示例</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;mutex&gt;</span></span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Test</span><br>&#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">Test</span>(<span class="hljs-type">const</span> Test&amp; t) = <span class="hljs-keyword">delete</span>;<br>    Test&amp; <span class="hljs-keyword">operator</span>=(<span class="hljs-type">const</span> Test&amp; t) = <span class="hljs-keyword">delete</span>;<br><br><br>    <span class="hljs-function"><span class="hljs-type">static</span> Test* <span class="hljs-title">GetInstance</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-function">std::lock_guard&lt;std::mutex&gt; <span class="hljs-title">lock</span><span class="hljs-params">(_mutex)</span></span>;<br>        <span class="hljs-keyword">if</span> (_instance == <span class="hljs-literal">nullptr</span>) &#123;<br>            _instance = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Test</span>();<br>        &#125;<br>        <span class="hljs-keyword">return</span> _instance;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Out</span><span class="hljs-params">()</span> </span>&#123; std::cout &lt;&lt; <span class="hljs-string">&quot;test&quot;</span> &lt;&lt; std::endl; &#125;<br><span class="hljs-keyword">private</span>:<br>    <span class="hljs-built_in">Test</span>() &#123;&#125;<br>    ~<span class="hljs-built_in">Test</span>() = <span class="hljs-keyword">default</span>;<br><br>    <span class="hljs-type">static</span> Test* _instance;<br>    <span class="hljs-type">static</span> std::mutex _mutex;<br><br>&#125;;<br>Test * Test::_instance = <span class="hljs-literal">nullptr</span>;<br>std::mutex Test::_mutex;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br><br>    Test::<span class="hljs-built_in">GetInstance</span>()-&gt;<span class="hljs-built_in">Out</span>();<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
                 
               </div>
             
@@ -309,7 +289,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/cpp/" class="print-no-link">#cpp</a>
+        <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="print-no-link">#设计模式</a>
       
     </div>
   
@@ -321,8 +301,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>野指针与悬挂指针</div>
-      <div>http://example.com/2024/10/06/野指针与悬挂指针/</div>
+      <div>单例模式</div>
+      <div>http://example.com/2024/10/08/单例模式/</div>
     </div>
     <div class="license-meta">
       
@@ -334,7 +314,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年10月6日</div>
+          <div>2024年10月8日</div>
         </div>
       
       
@@ -366,18 +346,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/10/08/%E8%99%9A%E5%87%BD%E6%95%B0/" title="虚函数">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">虚函数</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/10/06/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/" title="智能指针">
-                        <span class="hidden-mobile">智能指针</span>
+                      <a href="/2024/10/08/%E8%99%9A%E5%87%BD%E6%95%B0/" title="虚函数">
+                        <span class="hidden-mobile">虚函数</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
