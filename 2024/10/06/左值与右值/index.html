@@ -27,7 +27,7 @@
 <meta property="og:description" content="什么是左值，什么是右值左值：可以出现在赋值运算符的左边，并且可以被取地址，通常是有名字的变量。右值: 不能出现在赋值运算符的左边，不可以被取地址， 表示一个具体的数据值，通常是常量、临时变量。 区分： 12345左值：可以放在等号左边的值右值：不可以放在等号左边的值左值：可以被取地址并且有名字的值右值：不能取地址的没有名字的  示例 1int a&#x3D;b+c；  a 是左值，有变量名，可以取地址，也可">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-10-06T12:35:27.000Z">
-<meta property="article:modified_time" content="2024-10-08T03:23:05.107Z">
+<meta property="article:modified_time" content="2024-10-09T01:15:48.244Z">
 <meta property="article:author" content="sunyanan">
 <meta property="article:tag" content="cpp">
 <meta name="twitter:card" content="summary_large_image">
@@ -287,7 +287,7 @@
 <p><strong>左值引用</strong>：等号右边的值必须可以取地址，如果不能取地址，会编译失败。或者可以使用const引用形式，但是只能通过引用读取输出，不能修改，因为是常量引用。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-type">int</span> a=<span class="hljs-number">1</span>;<br><span class="hljs-type">int</span> &amp;b=a;<span class="hljs-comment">//b 是左值引用</span><br>b=<span class="hljs-number">4</span>;<br><span class="hljs-type">int</span> &amp;c=<span class="hljs-number">10</span>；<span class="hljs-comment">//error, 10无法取地址，无法进行引用</span><br><span class="hljs-type">const</span> <span class="hljs-type">int</span> &amp;d=<span class="hljs-number">10</span>；<span class="hljs-comment">//ok,因为是常量引用，引用常数字，会存储在内存中，可以取地址</span><br></code></pre></td></tr></table></figure>
 
-<p><strong>右值引用</strong><br>可以理解为对右值的引用，即对一个临时对象或者即将销毁的对象的引用，开发者可以利用这些临时对象，却不需要复制他们。<br>如果使用右值引用，那表达式右边的值需要时右值，可以使用std::move 函数强制将左值转换为右值。</p>
+<p><strong>右值引用</strong><br>可以理解为对右值的引用，即<strong>对一个临时对象或者即将销毁的对象的引用</strong>，开发者可以利用这些临时对象，却不需要复制他们。<br>如果使用右值引用，那表达式右边的值需要时右值，可以使用std::move 函数强制将左值转换为右值。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-type">int</span> a=<span class="hljs-number">1</span>;<br><span class="hljs-type">int</span> &amp;&amp;b=a;<span class="hljs-comment">//error a是左值</span><br><span class="hljs-type">int</span> &amp;&amp;c=std:<span class="hljs-built_in">move</span>(a);<br></code></pre></td></tr></table></figure>
 
 <p><strong>左值引用和右值引用的使用场景</strong><br>左值引用：当需要修改对象的值，或者需要引用一个持久对象时使用；<br>右值引用：当需要处理一个临时对象，并且想要避免复制，或者实现移动语义时使用。</p>

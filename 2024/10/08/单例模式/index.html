@@ -19,22 +19,22 @@
   <meta name="author" content="sunyanan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="面向对象特征 封装：将客观事物封装成抽象的类，类可以把自己的数据和方法暴露给可信的类或者对象，对不可信的进行信息隐藏 继承：可以使用现有类的所有功能，无需重新编写原来的类即可对功能进行扩展 多态：一个类实例的相同方法在不同情形下有不同的表现形式，使不同内部结构的对象可以共享相同的外部接口。  多态的实现有哪几种 静态多态：通过重载和模板技术实现的，在编译期间确定 动态多态：通过虚函数和继承关系实现">
+    <meta name="description" content="C++中 单例模式（singleton pattern）是一种设计模式，确保一个类只有一个实例，并提供一个全局访问点来获取该实例。 线程安全的单例示例1234567891011121314151617181920212223242526272829303132333435#include&lt;iostream&gt;#include&lt;mutex&gt;class Test&#123;pub">
 <meta property="og:type" content="article">
-<meta property="og:title" content="虚函数">
-<meta property="og:url" content="http://example.com/2024/10/08/%E8%99%9A%E5%87%BD%E6%95%B0/index.html">
+<meta property="og:title" content="单例模式">
+<meta property="og:url" content="http://example.com/2024/10/08/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/index.html">
 <meta property="og:site_name" content="SunAndMoons">
-<meta property="og:description" content="面向对象特征 封装：将客观事物封装成抽象的类，类可以把自己的数据和方法暴露给可信的类或者对象，对不可信的进行信息隐藏 继承：可以使用现有类的所有功能，无需重新编写原来的类即可对功能进行扩展 多态：一个类实例的相同方法在不同情形下有不同的表现形式，使不同内部结构的对象可以共享相同的外部接口。  多态的实现有哪几种 静态多态：通过重载和模板技术实现的，在编译期间确定 动态多态：通过虚函数和继承关系实现">
+<meta property="og:description" content="C++中 单例模式（singleton pattern）是一种设计模式，确保一个类只有一个实例，并提供一个全局访问点来获取该实例。 线程安全的单例示例1234567891011121314151617181920212223242526272829303132333435#include&lt;iostream&gt;#include&lt;mutex&gt;class Test&#123;pub">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-10-08T02:07:09.000Z">
-<meta property="article:modified_time" content="2024-10-09T01:30:09.708Z">
+<meta property="article:published_time" content="2024-10-08T12:32:32.000Z">
+<meta property="article:modified_time" content="2024-10-09T01:15:48.243Z">
 <meta property="article:author" content="sunyanan">
-<meta property="article:tag" content="cpp">
+<meta property="article:tag" content="设计模式">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>虚函数 - SunAndMoons</title>
+  <title>单例模式 - SunAndMoons</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -200,7 +200,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="虚函数"></span>
+            <span id="subtitle" data-typed-text="单例模式"></span>
           
         </div>
 
@@ -211,8 +211,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-10-08 10:07" pubdate>
-          2024年10月8日 上午
+        <time datetime="2024-10-08 20:32" pubdate>
+          2024年10月8日 晚上
         </time>
       </span>
     
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          678 字
+          396 字
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          6 分钟
+          4 分钟
         
       </span>
     
@@ -271,37 +271,20 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">虚函数</h1>
+            <h1 id="seo-header">单例模式</h1>
             
             
               <div class="markdown-body">
                 
-                <h4 id="面向对象特征"><a href="#面向对象特征" class="headerlink" title="面向对象特征"></a>面向对象特征</h4><ul>
-<li>封装：将客观事物封装成抽象的类，类可以把自己的数据和方法暴露给可信的类或者对象，对不可信的进行信息隐藏</li>
-<li>继承：可以使用现有类的所有功能，无需重新编写原来的类即可对功能进行扩展</li>
-<li>多态：一个类实例的相同方法在不同情形下有不同的表现形式，使不同内部结构的对象可以共享相同的外部接口。</li>
-</ul>
-<h4 id="多态的实现有哪几种"><a href="#多态的实现有哪几种" class="headerlink" title="多态的实现有哪几种"></a>多态的实现有哪几种</h4><ul>
-<li>静态多态：通过重载和模板技术实现的，在编译期间确定</li>
-<li>动态多态：通过虚函数和继承关系实现的，执行动态绑定，在运行期间确定</li>
-</ul>
-<h4 id="动态多态作用，有那些必要条件"><a href="#动态多态作用，有那些必要条件" class="headerlink" title="动态多态作用，有那些必要条件"></a>动态多态作用，有那些必要条件</h4><p>作用：</p>
+                <p>C++中 单例模式（singleton pattern）是一种设计模式，确保一个类只有一个实例，并提供一个全局访问点来获取该实例。</p>
+<h4 id="线程安全的单例示例"><a href="#线程安全的单例示例" class="headerlink" title="线程安全的单例示例"></a>线程安全的单例示例</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;mutex&gt;</span></span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Test</span><br>&#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">Test</span>(<span class="hljs-type">const</span> Test&amp; t) = <span class="hljs-keyword">delete</span>;<br>    Test&amp; <span class="hljs-keyword">operator</span>=(<span class="hljs-type">const</span> Test&amp; t) = <span class="hljs-keyword">delete</span>;<br><br><br>    <span class="hljs-function"><span class="hljs-type">static</span> Test* <span class="hljs-title">GetInstance</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-function">std::lock_guard&lt;std::mutex&gt; <span class="hljs-title">lock</span><span class="hljs-params">(_mutex)</span></span>;<br>        <span class="hljs-keyword">if</span> (_instance == <span class="hljs-literal">nullptr</span>) &#123;<br>            _instance = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Test</span>();<br>        &#125;<br>        <span class="hljs-keyword">return</span> _instance;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Out</span><span class="hljs-params">()</span> </span>&#123; std::cout &lt;&lt; <span class="hljs-string">&quot;test&quot;</span> &lt;&lt; std::endl; &#125;<br><span class="hljs-keyword">private</span>:<br>    <span class="hljs-built_in">Test</span>() &#123;&#125;<br>    ~<span class="hljs-built_in">Test</span>() = <span class="hljs-keyword">default</span>;<br><br>    <span class="hljs-type">static</span> Test* _instance;<br>    <span class="hljs-type">static</span> std::mutex _mutex;<span class="hljs-comment">//在静态成员函数中只能访问静态成员变量</span><br><br>&#125;;<br><span class="hljs-comment">//初始化</span><br>Test * Test::_instance = <span class="hljs-literal">nullptr</span>;<br>std::mutex Test::_mutex;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br><br>    Test::<span class="hljs-built_in">GetInstance</span>()-&gt;<span class="hljs-built_in">Out</span>();<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h4><p><code>static</code> 关键字</p>
 <ul>
-<li>隐藏实现细节，使代码模块化，提高代码的可复用性</li>
-<li>接口重用，派生列的功能可以被基类的指针&#x2F;引用所调用，向后兼容，提高代码的维护性和可扩展性</li>
+<li>修改成员变量时，所有对象值维持一份拷贝，可以实现不同对象间的数据共享；不需要实例化对象即可访问；不能在类的内部初始化，一般在类外部初始化，并且初始化时不加 <code>static</code>;</li>
+<li>修饰成员函数时：该函数不接受 <code>this</code> 指针，<strong>只能访问类的静态成员</strong>；不需要实例化对象即可访问。</li>
 </ul>
-<p>必要条件</p>
-<ul>
-<li>有继承</li>
-<li>与虚函数覆盖</li>
-<li>有基类指针&#x2F;引用指向子类对象</li>
-</ul>
-<h4 id="动态绑定如何实现"><a href="#动态绑定如何实现" class="headerlink" title="动态绑定如何实现"></a>动态绑定如何实现</h4><p>当编译器发现类中有虚函数时，会创建一个虚函数表，把虚函数的函数入口地址放在虚函数表中，并在对象中增加一个指针vptr ，用于指向类的虚函数表。当派生类覆盖基类的虚函数时，会将虚函数表中对应的指针替换，从而调用派生类中覆盖后的虚函数，实现动态绑定。</p>
-<h4 id="纯虚继承作用，如何实现？"><a href="#纯虚继承作用，如何实现？" class="headerlink" title="纯虚继承作用，如何实现？"></a>纯虚继承作用，如何实现？</h4><p>为了实现一个接口，起到规范的作用，想要继承类就需要覆盖函数。</p>
-<p>实现：在函数声明时结尾 <code>=0</code>。</p>
-<h4 id="虚函数"><a href="#虚函数" class="headerlink" title="虚函数"></a>虚函数</h4><p>被 <code>virtual</code> 关键字修饰的成员函数</p>
-<h4 id="为什么基类的构造函数不能定义为虚函数"><a href="#为什么基类的构造函数不能定义为虚函数" class="headerlink" title="为什么基类的构造函数不能定义为虚函数"></a>为什么基类的构造函数不能定义为虚函数</h4><p>虚函数的调用依赖于虚函数表，指向虚函数表的指针需要在构造函数中进行初始化，所以无法调用定义为虚函数的构造函数。</p>
-<h4 id="什么基类的析构函数需要定义为虚函数"><a href="#什么基类的析构函数需要定义为虚函数" class="headerlink" title="什么基类的析构函数需要定义为虚函数"></a>什么基类的析构函数需要定义为虚函数</h4><p>为了实现动态绑定，基类指针指向派生类对象，如果析构函数不是虚函数，那么在对象销毁时，就是调用基类的析构函数，只能销毁派生类对象中的部分数据，所以必须将析构函数定义为虚函数。从而在对象销毁时，调用派生类的析构函数，从而销毁派生对象的所有数据。</p>
+<p>当<code>static</code> 关键字作用域类的成员函数或成员变量时，<strong>这些成员属于类本身</strong>，而不是类的某个特定对象。意味着，静态成员可以在没有创建类对象的情况下被访问的修改。<br>静态成员函数只能访问静态成员变量和静态成员函数，因为他们没有 <code>this</code>指针。静态成员函数通常用于实现那些与特定对象状态无关的功能。</p>
 
                 
               </div>
@@ -310,32 +293,11 @@
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/cpp/" class="category-chain-item">cpp</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
   
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/cpp/" class="print-no-link">#cpp</a>
+        <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="print-no-link">#设计模式</a>
       
     </div>
   
@@ -347,8 +309,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>虚函数</div>
-      <div>http://example.com/2024/10/08/虚函数/</div>
+      <div>单例模式</div>
+      <div>http://example.com/2024/10/08/单例模式/</div>
     </div>
     <div class="license-meta">
       
@@ -392,9 +354,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/10/08/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" title="单例模式">
+                      <a href="/2024/10/08/static/" title="static">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">单例模式</span>
+                        <span class="hidden-mobile">static</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -402,8 +364,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/10/06/%E9%87%8E%E6%8C%87%E9%92%88%E4%B8%8E%E6%82%AC%E6%8C%82%E6%8C%87%E9%92%88/" title="野指针与悬挂指针">
-                        <span class="hidden-mobile">野指针与悬挂指针</span>
+                      <a href="/2024/10/08/%E8%99%9A%E5%87%BD%E6%95%B0/" title="虚函数">
+                        <span class="hidden-mobile">虚函数</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
