@@ -4,6 +4,44 @@
   
   
   <entry>
+    <title>Git</title>
+    <link href="/2024/11/05/git/"/>
+    <url>/2024/11/05/git/</url>
+    
+    <content type="html"><![CDATA[<h6 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span>  --recursive //递归的方式克隆整个项目, 包含子项目<br>git submodule add   //添加子模块<br>git submodule init //初始化子模块<br>git submodule update //更新子模块<br>git submodule foreach git pull //拉取所有子模块<br></code></pre></td></tr></table></figure><h6 id="查看所有分支"><a href="#查看所有分支" class="headerlink" title="查看所有分支"></a>查看所有分支</h6><p><code>git branch -a</code></p><h6 id="创建分支"><a href="#创建分支" class="headerlink" title="创建分支"></a>创建分支</h6><p><code>git branch L2Map_New_RampAssist</code></p><h6 id="切换分支"><a href="#切换分支" class="headerlink" title="切换分支"></a>切换分支</h6><p><code>git checkout L2Map_New_RampAssist</code></p><h6 id="创建-切换分支"><a href="#创建-切换分支" class="headerlink" title="创建+切换分支"></a>创建+切换分支</h6><p><code>git checkout -b L2Map_New_RampAssist</code></p><h5 id="将本地分支同步到远程"><a href="#将本地分支同步到远程" class="headerlink" title="将本地分支同步到远程"></a>将本地分支同步到远程</h5><p><code>git push origin L2Map_New_RampAssist:L2Map_New_RampAssist</code></p><h6 id="删除远程分支"><a href="#删除远程分支" class="headerlink" title="删除远程分支"></a>删除远程分支</h6><p><code>git push origin -d branch_name</code></p><h6 id="所有子模块切换到master分支"><a href="#所有子模块切换到master分支" class="headerlink" title="所有子模块切换到master分支"></a>所有子模块切换到master分支</h6><p><code>git submodule foreach git checkout master </code></p><h6 id="添加submodel"><a href="#添加submodel" class="headerlink" title="添加submodel"></a>添加submodel</h6><ol><li>clone 代码，生成文件夹</li><li>在代码的最外层</li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">git pull <br>git submodule add git@gitlab.navinfo.com:compiler/sdpro_mmt/sdpro_mmt_makeobjectdata.git ./compiler/SDPro_MMT/SDPro_MMT_MakeObjectData <br><br></code></pre></td></tr></table></figure><h6 id="clone-使用https"><a href="#clone-使用https" class="headerlink" title="clone 使用https"></a>clone 使用https</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">git config --global --<span class="hljs-built_in">unset</span> http.proxy<br>git config --global --<span class="hljs-built_in">unset</span> https.proy<br></code></pre></td></tr></table></figure><h6 id="Clone指定版本代码"><a href="#Clone指定版本代码" class="headerlink" title="Clone指定版本代码"></a>Clone指定版本代码</h6><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">git</span> checkout 版本号<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>Git</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>linux</title>
+    <link href="/2024/11/05/linux/"/>
+    <url>/2024/11/05/linux/</url>
+    
+    <content type="html"><![CDATA[<h6 id="1-显示所有包含关键字的进程"><a href="#1-显示所有包含关键字的进程" class="headerlink" title="1.显示所有包含关键字的进程"></a>1.显示所有包含关键字的进程</h6><p>管道符 “|” 用来隔开两个命令，管道符左边命令的输出会作为管道符右边命令的输入;</p><p>grep 命令用来查找文件里符合条件的字符串或正则表达式</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">ps -ef | grep XXX<br></code></pre></td></tr></table></figure><h6 id="2-kill"><a href="#2-kill" class="headerlink" title="2. kill"></a>2. kill</h6><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-built_in">kill</span> pid<br><span class="hljs-built_in">kill</span> -9 pid //强制杀死<br></code></pre></td></tr></table></figure><h6 id="3-ip相关"><a href="#3-ip相关" class="headerlink" title="3.ip相关"></a>3.ip相关</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash">//install<br>apt-get install net-tools<br>//获取IP地址<br>ip addr<br><br>//只获取IP地址<br>ip addr | grep <span class="hljs-string">&#x27;inet &#x27;</span> | grep -v <span class="hljs-string">&#x27;127.0.0.1&#x27;</span> | awk <span class="hljs-string">&#x27;&#123;print $2&#125;&#x27;</span> | <span class="hljs-built_in">cut</span> -f1 -d<span class="hljs-string">&#x27;/&#x27;</span><br><br></code></pre></td></tr></table></figure><h6 id="4-tar"><a href="#4-tar" class="headerlink" title="4.tar"></a>4.tar</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">//将 .tar.gz 文件解压缩到不同的工作目录<br>tar -xvf /tmp/mapdata.tar.gz -C /userdata/map/mapdata<br></code></pre></td></tr></table></figure><h5 id="5-cmake"><a href="#5-cmake" class="headerlink" title="5.cmake"></a>5.cmake</h5><p>安装boost库</p><figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs q">sudo apt-<span class="hljs-built_in">get</span> install libboost-<span class="hljs-built_in">all</span>-<span class="hljs-built_in">dev</span> -y<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>linux</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>数据格式</title>
     <link href="/2024/11/05/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F/"/>
     <url>/2024/11/05/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F/</url>
