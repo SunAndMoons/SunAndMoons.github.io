@@ -19,22 +19,22 @@
   <meta name="author" content="sunyanan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="在c++中，static 是一个非常重要的修饰符，可以应用于变量、函数、成员函数和成员变量。 1.静态局部变量作用域函数内部的局部变量时，该变量的生命周期被延长到整个程序的生命周期， 但其作用域仍然限制到定义其的函数内部。即使函数执行完毕，该变量的值也会保留到下次该函数被调用时。这种特性能够使得函数能够‘记住’之前的状态。 static 修饰的局部变量的存储位置在程序执行执行期间保持不变，且只在程">
+    <meta name="description" content="地理空间数据基于文件的空间数据，Gis直接支持的空间数据类型主要包括矢量数据文件、3D模型、映像文件等。  矢量数据文件：shp、sdc、file Gdb、CAD、GeoJson、xml等 3D模型：3DMax、SKP等 影像文件（栅格文件）：TIF、TIFF、JPEG、GIF  1. GeoJsonGeoJson是Json数据（键值对）针对地理数据的变种。 用于数据的显示 12345678910">
 <meta property="og:type" content="article">
-<meta property="og:title" content="static">
-<meta property="og:url" content="http://example.com/2024/10/08/static/index.html">
+<meta property="og:title" content="数据格式">
+<meta property="og:url" content="http://example.com/2024/11/05/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F/index.html">
 <meta property="og:site_name" content="SunAndMoons">
-<meta property="og:description" content="在c++中，static 是一个非常重要的修饰符，可以应用于变量、函数、成员函数和成员变量。 1.静态局部变量作用域函数内部的局部变量时，该变量的生命周期被延长到整个程序的生命周期， 但其作用域仍然限制到定义其的函数内部。即使函数执行完毕，该变量的值也会保留到下次该函数被调用时。这种特性能够使得函数能够‘记住’之前的状态。 static 修饰的局部变量的存储位置在程序执行执行期间保持不变，且只在程">
+<meta property="og:description" content="地理空间数据基于文件的空间数据，Gis直接支持的空间数据类型主要包括矢量数据文件、3D模型、映像文件等。  矢量数据文件：shp、sdc、file Gdb、CAD、GeoJson、xml等 3D模型：3DMax、SKP等 影像文件（栅格文件）：TIF、TIFF、JPEG、GIF  1. GeoJsonGeoJson是Json数据（键值对）针对地理数据的变种。 用于数据的显示 12345678910">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-10-08T15:05:50.000Z">
-<meta property="article:modified_time" content="2024-10-09T01:44:12.814Z">
+<meta property="article:published_time" content="2024-11-05T08:29:17.000Z">
+<meta property="article:modified_time" content="2024-11-05T08:30:56.307Z">
 <meta property="article:author" content="sunyanan">
-<meta property="article:tag" content="cpp">
+<meta property="article:tag" content="Gis">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>static - SunAndMoons</title>
+  <title>数据格式 - SunAndMoons</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -200,7 +200,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="static"></span>
+            <span id="subtitle" data-typed-text="数据格式"></span>
           
         </div>
 
@@ -211,8 +211,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-10-08 23:05" pubdate>
-          2024年10月8日 晚上
+        <time datetime="2024-11-05 16:29" pubdate>
+          2024年11月5日 下午
         </time>
       </span>
     
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          702 字
+          770 字
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          6 分钟
+          7 分钟
         
       </span>
     
@@ -271,32 +271,64 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">static</h1>
+            <h1 id="seo-header">数据格式</h1>
             
             
               <div class="markdown-body">
                 
-                <p>在c++中，<code>static</code> 是一个非常重要的修饰符，可以应用于变量、函数、成员函数和成员变量。</p>
-<h5 id="1-静态局部变量"><a href="#1-静态局部变量" class="headerlink" title="1.静态局部变量"></a>1.静态局部变量</h5><p>作用域函数内部的局部变量时，该变量的生命周期被延长到<strong>整个程序的生命周期</strong>， 但其作用域仍然限制到定义其的函数内部。<br>即使函数执行完毕，该变量的值也会保留到下次该函数被调用时。这种特性能够使得函数能够‘记住’之前的状态。</p>
-<p>static 修饰的局部变量的存储位置在程序执行执行期间保持不变，且只在程序执行到该变量的声明时初始化一次。<br>即使函数被多次调用，static 局部变量也旨在第一次调用时初始化，之后的调用不会再初始化。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">fun</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-type">static</span> <span class="hljs-type">int</span> itime = <span class="hljs-number">1</span>;<br>	itime++;<br>	std::cout &lt;&lt; itime &lt;&lt; std::endl;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; ++i) &#123;<br>		<span class="hljs-built_in">fun</span>();<br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>输出结果：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs">2<br>3<br>4<br>5<br>6<br></code></pre></td></tr></table></figure>
-
-<h5 id="2-修饰全局变量或函数"><a href="#2-修饰全局变量或函数" class="headerlink" title="2. 修饰全局变量或函数"></a>2. 修饰全局变量或函数</h5><p>主要作用：限制变量和函数的作用域，只能在定义它们的文件内部访问。由于避免在不同文件之间的命名冲突。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// file1.cpp</span><br><span class="hljs-type">static</span> <span class="hljs-type">int</span> count = <span class="hljs-number">10</span>; <span class="hljs-comment">// count变量只能在file1.cpp中访问</span><br><br><span class="hljs-function"><span class="hljs-type">static</span> <span class="hljs-type">void</span> <span class="hljs-title">func</span><span class="hljs-params">()</span> </span>&#123; <span class="hljs-comment">// func函数只能在file1.cpp中访问</span><br>    cout &lt;&lt; <span class="hljs-string">&quot;Function in file1&quot;</span> &lt;&lt; endl;<br>&#125;<br><br><span class="hljs-comment">// file2.cpp</span><br><span class="hljs-keyword">extern</span> <span class="hljs-type">int</span> count; <span class="hljs-comment">// 这里会导致编译错误，因为count是static的，不能在file2.cpp中访问</span><br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">anotherFunc</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-built_in">func</span>(); <span class="hljs-comment">// 这里也会导致编译错误，因为func是static的，不能在file2.cpp中访问</span><br>&#125;<br><br></code></pre></td></tr></table></figure>
-
-<h5 id="3-修饰类的成员函数或变量"><a href="#3-修饰类的成员函数或变量" class="headerlink" title="3. 修饰类的成员函数或变量"></a>3. 修饰类的成员函数或变量</h5><p>在类的内部，<code>static</code> 成员变量或者函数属于成员本身，而不是类的特定对象。即所有对象共享一个static成员变量，无需每个对象都存储一份拷贝。<code>static</code> 成员函数能够在没有类的示例时访问。<br><code>static</code> 成员函数只能访问 <code>static</code>成员变量或者 静态成员函数。</p>
-<p><code>static</code>成员变量在类外进行初始初始化，且 不需要加 <code>static</code>关键字。</p>
-<p>单例模式使用了 <code>static</code> 关键字的特性</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Singleton</span> &#123;<br><br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-built_in">Singleton</span>(<span class="hljs-type">const</span> Singleton&amp; instance) = <span class="hljs-keyword">delete</span>;<br>	Singleton&amp; <span class="hljs-keyword">operator</span>=(<span class="hljs-type">const</span> Singleton&amp; instance) = <span class="hljs-keyword">delete</span>;<br>	<span class="hljs-function"><span class="hljs-type">static</span> Singleton* <span class="hljs-title">GetInstance</span><span class="hljs-params">()</span></span><br><span class="hljs-function">	</span>&#123;<br>		<span class="hljs-keyword">if</span> (_instance == <span class="hljs-literal">nullptr</span>) &#123;<br>			_instance = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Singleton</span>();<br>		&#125;<br>		<span class="hljs-keyword">return</span> _instance;<br><br>	&#125;<br>	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Out</span><span class="hljs-params">()</span> </span>&#123;&#125;<br><span class="hljs-keyword">private</span>:<br>	<span class="hljs-built_in">Singleton</span>() &#123;&#125;<br>	~<span class="hljs-built_in">Singleton</span>() = <span class="hljs-keyword">default</span>;<br><br>	<span class="hljs-type">static</span> Singleton* _instance;<br>&#125;;<br><br>Singleton* Singleton::_instance = <span class="hljs-literal">nullptr</span>;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	Singleton::<span class="hljs-built_in">GetInstance</span>()-&gt;<span class="hljs-built_in">Out</span>();<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<h5 id="4-使用场景"><a href="#4-使用场景" class="headerlink" title="4. 使用场景"></a>4. 使用场景</h5><ul>
-<li>static 局部变量：在函数的多次调用之间记住某个变量的值时；</li>
-<li>static 全局变量或函数：显示变量或者函数的作用域，防止在其他文件中被访问；</li>
-<li>static 类的成员变量或者函数：所有对象共享某个变量或者成员时；或者没有类的实例的情况下访问某个函数时。</li>
+                <h4 id="地理空间数据"><a href="#地理空间数据" class="headerlink" title="地理空间数据"></a>地理空间数据</h4><p>基于文件的空间数据，Gis直接支持的空间数据类型主要包括矢量数据文件、3D模型、映像文件等。</p>
+<ul>
+<li>矢量数据文件：shp、sdc、file Gdb、CAD、GeoJson、xml等</li>
+<li>3D模型：3DMax、SKP等</li>
+<li>影像文件（栅格文件）：TIF、TIFF、JPEG、GIF</li>
 </ul>
+<h5 id="1-GeoJson"><a href="#1-GeoJson" class="headerlink" title="1. GeoJson"></a>1. GeoJson</h5><p>GeoJson是Json数据（键值对）针对地理数据的变种。</p>
+<p>用于数据的显示</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>    “type”<span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Feature&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;geometry&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-string">&quot;type&quot;</span>：“Point”<span class="hljs-punctuation">,</span><br>        “coordinates”<span class="hljs-punctuation">:</span><span class="hljs-punctuation">[</span><span class="hljs-number">125.6</span><span class="hljs-punctuation">,</span><span class="hljs-number">10.1</span><span class="hljs-punctuation">]</span><br>    <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>	<span class="hljs-attr">&quot;properties&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-string">&quot;name&quot;</span>：<span class="hljs-string">&quot;liaoning&quot;</span><br>    <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>最外层</strong></p>
+<ul>
+<li><p>type: Featrue 表示特征要素，FeatureCollection表示特征要素的集合</p>
+</li>
+<li><p>geomotry:存储特征要素的实际形状描述</p>
+</li>
+<li><p>properties：存储要素的属性</p>
+<p>Geometry:</p>
+<ul>
+<li>type：存储要素的类型：Point、LineString、Polygon、MultiPoint、MultiLineString、MultiPolygon</li>
+<li>coordinates:坐标</li>
+</ul>
+</li>
+</ul>
+<p>在FeatureCollection中，features:可以存放多个feature,并且feature的种类可以不同。</p>
+<p>GeoJson可能有一个可选的 <strong>crs</strong> 成员，其值必须是一个坐标参考系统的对象。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-string">&quot;type&quot;</span>：<span class="hljs-string">&quot;FeatureCollection&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;crs&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">&#123;</span><br>	<span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;name&quot;</span><span class="hljs-punctuation">,</span><br>	<span class="hljs-attr">&quot;properties&quot;</span><span class="hljs-punctuation">:</span>							<span class="hljs-punctuation">&#123;</span><span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;urn:ogc:def:crs:OGC:1.3:CRS84&quot;</span><span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>”feature“：<span class="hljs-punctuation">[</span><br>    <span class="hljs-comment">//其他内容</span><br><span class="hljs-punctuation">]</span><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>示例</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp">clFeature.mProperties.<span class="hljs-built_in">addProperty</span>(<span class="hljs-string">&quot;HAS_TRAFFIC_LIGHT&quot;</span>, <span class="hljs-built_in">to_string</span>(m_bhas_traffic_light).<span class="hljs-built_in">data</span>());<br>clFeature.mGeom.<span class="hljs-built_in">setGeometry_Point</span>(<span class="hljs-built_in">make_tuple</span>(clDot.m_clDotPos.dx, clDot.m_clDotPos.dy, <span class="hljs-number">0</span>));<br><span class="hljs-comment">//写入到文件</span><br>m_clLaneBoundaryStartPointWriter.<span class="hljs-built_in">addFeature</span>(clFeature)<br>        <br></code></pre></td></tr></table></figure>
+
+
+
+<h5 id="2-ArcGis格式解析"><a href="#2-ArcGis格式解析" class="headerlink" title="2. ArcGis格式解析"></a>2. ArcGis格式解析</h5><h6 id="shape数据"><a href="#shape数据" class="headerlink" title="shape数据"></a>shape数据</h6><p>shapefile是Arcview Gis3.x的原生数据，属于简单要素类，用点、线、多边形存储要素的形状、不存储拓扑关系，简单、快速显示的优点。一个shapefile是由若干个文件组成的，<strong>空间信息</strong>、C:\nic_make\nic\input\SD\Incar\liaoning\road信息分离存储</p>
+<h6 id="shp文件-图形格式"><a href="#shp文件-图形格式" class="headerlink" title=".shp文件(图形格式)"></a>.shp文件(图形格式)</h6><p>保存元素的几个实体，存储的是几个要素的空间信息，XY坐标：一般X对应经度，Y对应纬度</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs tex">header: 100个字节<br>	CurDA:对应的偏移量/大小<br>	FileCode:文件编号<br>	Unused1:<br>	Unused2:<br>	Unused3:<br>	Unused4:<br>	Unused5:未被使用的32位整数<br>	FileLength：文件长度，包括文件头<br>	Version：b版本信息<br>	Type：图形类型<br>	Xmin：<br>	Ymin：<br>	Xmax：<br>	Ymax:最小外接矩阵<br>	Zmin：<br>	Zmax:z的坐标值<br>	Mmin:<br>	Mmax：M坐标：测量值 不归属坐标系	<br><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs tex">图形类型：<br>	Point:点<br>	Ployline：折线<br>	ploygon：多边形<br>	<br></code></pre></td></tr></table></figure>
+
+
+
+<h6 id="shx文件-图形索引格式"><a href="#shx文件-图形索引格式" class="headerlink" title=".shx文件(图形索引格式)"></a>.shx文件(图形索引格式)</h6><p>几何体的位置索引，记录每一个几何体在shp文件之中的位置，加快向前向后搜索的效率。存储的是有关***.shp<em>*存储的索引信息，记录了在 *.shp中，空间数据是如何存储的，XY坐标的输入点在哪里，有多少XY坐标对等信息**；加快向前或向后搜索一个几何体的效率</em>*；文件索引</p>
+<h6 id="dbf文件-属性数据格式"><a href="#dbf文件-属性数据格式" class="headerlink" title=".dbf文件(属性数据格式)"></a>.dbf文件(属性数据格式)</h6><p>存储地理数据的属性信息的dbase表，存储每个几何形状的属性数据</p>
+<h6 id="prj文件"><a href="#prj文件" class="headerlink" title=".prj文件"></a>.prj文件</h6><p>定义的坐标系统：wGS84坐标</p>
+<p>- </p>
+<h5 id="3-WKT"><a href="#3-WKT" class="headerlink" title="3. WKT"></a>3. WKT</h5><p>OpenGIS定义地理参照坐标系的方式。</p>
+<p>用于表示矢量几个对象，空间参照系统及空间参照系统之间的转换。</p>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dns">&quot;POINT(<span class="hljs-number">109.027529</span> <span class="hljs-number">24.146990</span>)&quot; <br></code></pre></td></tr></table></figure>
+
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dns">&quot;POLYGON((<span class="hljs-number">117.062856</span> <span class="hljs-number">31.830043</span>, <span class="hljs-number">117.062856</span> <span class="hljs-number">31.830047</span>, <span class="hljs-number">117.063385</span> <span class="hljs-number">31.830047</span>, <span class="hljs-number">117.063385</span> <span class="hljs-number">31.830043</span>, <span class="hljs-number">117.062856</span> <span class="hljs-number">31.830043</span>))&quot;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs tap">&quot;LINESTRING (30 10,<span class="hljs-number"> 10 </span>30,<span class="hljs-number"> 40 </span>40)&quot;<br></code></pre></td></tr></table></figure>
+
 
                 
               </div>
@@ -305,32 +337,11 @@
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/cpp/" class="category-chain-item">cpp</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
   
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/cpp/" class="print-no-link">#cpp</a>
+        <a href="/tags/Gis/" class="print-no-link">#Gis</a>
       
     </div>
   
@@ -342,8 +353,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>static</div>
-      <div>http://example.com/2024/10/08/static/</div>
+      <div>数据格式</div>
+      <div>http://example.com/2024/11/05/数据格式/</div>
     </div>
     <div class="license-meta">
       
@@ -355,7 +366,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年10月8日</div>
+          <div>2024年11月5日</div>
         </div>
       
       
@@ -387,18 +398,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/10/22/%E5%9B%9E%E6%BA%AF/" title="回溯">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">回溯</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/10/08/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" title="单例模式">
-                        <span class="hidden-mobile">单例模式</span>
+                      <a href="/2024/11/03/vector%E6%89%A9%E5%AE%B9/" title="vector扩容">
+                        <span class="hidden-mobile">vector扩容</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
