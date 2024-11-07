@@ -1,0 +1,690 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="sunyanan">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="坐标及Tile|Mesh转换1.不同的坐标系1.1 WGS84坐标​		地球坐标系：GPS&#x2F;谷歌地图卫星（客户需要的坐标） 1.2 GCJ02坐标​		火星坐标系：中国国家测绘局定制的地理信息系统的坐标系统，在中国使用的地图产品必须是加密后的坐标，GCJ02为WGS84坐标加密后；主要产品：高德地图、腾讯地图、阿里云地图、谷歌国内地图 1.3 BD09坐标​		百度坐标系。在GCJ02的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="坐标以及tile mesh 的转换">
+<meta property="og:url" content="http://example.com/2024/11/05/%E5%9D%90%E6%A0%87%E5%8F%8ATileMesh%E8%BD%AC%E6%8D%A2/index.html">
+<meta property="og:site_name" content="SunAndMoons">
+<meta property="og:description" content="坐标及Tile|Mesh转换1.不同的坐标系1.1 WGS84坐标​		地球坐标系：GPS&#x2F;谷歌地图卫星（客户需要的坐标） 1.2 GCJ02坐标​		火星坐标系：中国国家测绘局定制的地理信息系统的坐标系统，在中国使用的地图产品必须是加密后的坐标，GCJ02为WGS84坐标加密后；主要产品：高德地图、腾讯地图、阿里云地图、谷歌国内地图 1.3 BD09坐标​		百度坐标系。在GCJ02的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/..%5Cimage%5Cimage-20241106152704048.png">
+<meta property="og:image" content="http://example.com/..%5Cimage%5Cimage-20231229150230040.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200302210437662.gif?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3N1bnJpdmVyMjAwMA==,size_16,color_FFFFFF,t_70">
+<meta property="article:published_time" content="2024-11-05T09:08:20.000Z">
+<meta property="article:modified_time" content="2024-11-07T07:39:48.510Z">
+<meta property="article:author" content="sunyanan">
+<meta property="article:tag" content="Gis">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/..%5Cimage%5Cimage-20241106152704048.png">
+  
+  
+  
+  <title>坐标以及tile mesh 的转换 - SunAndMoons</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>SunAndMoons</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="坐标以及tile mesh 的转换"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-11-05 17:08" pubdate>
+          2024年11月5日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          12 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">坐标以及tile mesh 的转换</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="坐标及Tile-Mesh转换"><a href="#坐标及Tile-Mesh转换" class="headerlink" title="坐标及Tile|Mesh转换"></a>坐标及Tile|Mesh转换</h2><h3 id="1-不同的坐标系"><a href="#1-不同的坐标系" class="headerlink" title="1.不同的坐标系"></a>1.不同的坐标系</h3><h4 id="1-1-WGS84坐标"><a href="#1-1-WGS84坐标" class="headerlink" title="1.1 WGS84坐标"></a>1.1 WGS84坐标</h4><p>​		地球坐标系：GPS&#x2F;谷歌地图卫星（客户需要的坐标）</p>
+<h4 id="1-2-GCJ02坐标"><a href="#1-2-GCJ02坐标" class="headerlink" title="1.2 GCJ02坐标"></a>1.2 GCJ02坐标</h4><p>​		火星坐标系：中国国家测绘局定制的地理信息系统的坐标系统，在中国使用的地图产品必须是加密后的坐标，GCJ02为WGS84坐标加密后；主要产品：高德地图、腾讯地图、阿里云地图、谷歌国内地图</p>
+<h4 id="1-3-BD09坐标"><a href="#1-3-BD09坐标" class="headerlink" title="1.3 BD09坐标"></a>1.3 BD09坐标</h4><p>​		百度坐标系。在GCJ02的基础上进行了二次加密</p>
+<h4 id="1-4-NDS坐标"><a href="#1-4-NDS坐标" class="headerlink" title="1.4 NDS坐标"></a>1.4 NDS坐标</h4><p>将经度映射到<br>$$<br>[-2^{31},2^{31})<br>$$<br>将纬度映射到<br>$$<br>[-2^{30},2^{30})<br>$$<br><img src="/..%5Cimage%5Cimage-20241106152704048.png" srcset="/img/loading.gif" lazyload alt="image-20241106152704048"></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//02坐标系向nds坐标系转换</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">Cnv02Coord2NdsCoord</span><span class="hljs-params">(<span class="hljs-type">double</span> d)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">return</span> d * <span class="hljs-number">2147483648.0</span> / <span class="hljs-number">180.0</span>;<br>    <span class="hljs-keyword">return</span> d* (<span class="hljs-number">1</span>&lt;&lt;<span class="hljs-number">30</span>)/<span class="hljs-number">90</span><br>&#125;<br><br><span class="hljs-comment">// NDS坐标系向02坐标系转换</span><br><span class="hljs-type">double</span> <span class="hljs-built_in">CnvNdsCoordTo02Coord</span>(<span class="hljs-type">int</span> iCoord)<br>&#123;<br>	<span class="hljs-built_in">return</span> ((<span class="hljs-type">double</span>)iCoord) * <span class="hljs-number">180.0</span> / <span class="hljs-number">2147483648.0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>Morton Codes</p>
+<p>通过int32 表示经纬度：<br>$$<br>x&#x3D;x_{31}x_{30}…x_{1}x_{0}<br>$$</p>
+<p>$$<br>y&#x3D;y_{30}y_{29}…y_{1}y_{0}<br>$$</p>
+<p>morton code通过63-bit表示<br>$$<br>c&#x3D;x_{31} y_{30} x_{30}… x_{1}y_{0}x_{0}<br>$$</p>
+<p>$$<br>0 \leq c&lt;2^{63}<br>$$</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">CoordToMortonCode</span><span class="hljs-params">(<span class="hljs-type">int</span> iLong, <span class="hljs-type">int</span> iLat, uint64&amp; uiMortonCode)</span></span><br><span class="hljs-function"></span>&#123;<br>	uiMortonCode = <span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">32</span>; i++)<br>	&#123;<br>		uint64 uiTmp64 = <span class="hljs-number">0</span>;<br>		uiTmp64 = (iLong &gt;&gt; i) &amp; <span class="hljs-number">0x1</span>;<br>		uiTmp64 |= ((iLat &gt;&gt; i) &amp; <span class="hljs-number">0x1</span>) &lt;&lt; <span class="hljs-number">1</span>;<br><br>		uiMortonCode |= (uiTmp64 &lt;&lt; <span class="hljs-number">2</span> * i);<br>	&#125;<br>	<span class="hljs-keyword">return</span> SUCCESS;<br>&#125;<br><br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">MortonCodeToCoord</span><span class="hljs-params">(uint64 uiMortonCode, <span class="hljs-type">int</span>&amp; iLong, <span class="hljs-type">int</span>&amp; iLat)</span></span><br><span class="hljs-function"></span>&#123;<br>	iLong = <span class="hljs-number">0</span>;<br>	iLat = <span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">32</span>; i++)<br>	&#123;<br>		uint uiTmpCode = uiMortonCode &amp; <span class="hljs-number">0x3</span>;<br><br>		iLong |= ((uiTmpCode &amp; <span class="hljs-number">0x1</span>) &lt;&lt; i);<br>		iLat |= (((uiTmpCode &amp; <span class="hljs-number">0x2</span>) &gt;&gt; <span class="hljs-number">1</span>) &lt;&lt; i);<br><br>		uiMortonCode &gt;&gt;= <span class="hljs-number">2</span>;<br>	&#125;<br>	<span class="hljs-keyword">return</span> SUCCESS;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>Coord shift</strong></p>
+<p><img src="/..%5Cimage%5Cimage-20231229150230040.png" srcset="/img/loading.gif" lazyload alt="image-20231229150230040"></p>
+<p><strong>NDS中road 形状点存储</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><br><span class="hljs-keyword">enum</span> <span class="hljs-title class_">bit</span>:<span class="hljs-number">2</span> ShapePointType<br>&#123;	 	<br>BASE_LINK_NO_GEOMETRY	= <span class="hljs-number">0</span>,<br>BASE_LINK_WITH_GEOMETRY	= <span class="hljs-number">1</span>,<br>ROUTE_LINK= <span class="hljs-number">2</span><br>&#125;;<br></code></pre></td></tr></table></figure>
+<p>BASE_LINK_NO_GEOMETRY：没有形状点</p>
+<p>BASE_LINK_WITH_GEOMETRY<br>Link的 start 和end 都在当前tile 内。形状点存储的是相对于start 的offset。start ：相对于Tile中心点的offset</p>
+<p>ROUTE_LINK<br>形状点存储在roadGeoLine: V0存储相对于Tile中心点的offset。</p>
+<h3 id="2-Mesh-Tile"><a href="#2-Mesh-Tile" class="headerlink" title="2.Mesh &amp;Tile"></a>2.Mesh &amp;Tile</h3><h4 id="2-1-MeshID"><a href="#2-1-MeshID" class="headerlink" title="2.1 MeshID"></a>2.1 MeshID</h4><p>GCJ02-&gt;nds坐标</p>
+<p>根据nds坐标获取 level 13 和level 9的tileID 以及MeshID</p>
+<h3 id="3-坐标转换方法"><a href="#3-坐标转换方法" class="headerlink" title="3.坐标转换方法"></a>3.坐标转换方法</h3><p>参照MeshListTool中的坐标转换方法</p>
+<h3 id="4-Tile转换方法"><a href="#4-Tile转换方法" class="headerlink" title="4.Tile转换方法"></a>4.Tile转换方法</h3><h4 id="4-1-NDS-Tiling-Scheme-网格划分"><a href="#4-1-NDS-Tiling-Scheme-网格划分" class="headerlink" title="4.1 NDS-Tiling Scheme(网格划分)"></a>4.1 NDS-Tiling Scheme(网格划分)</h4><p>NDS中，数据是以 <strong>tile</strong> 为单位进行存储。一个tile包含在这个tile边界的地理范围的所有Feature; 这些Feature按照datascript定义的格式进行编码：<strong>BLOBS</strong></p>
+<p><strong>Tiles and Building Blocks</strong></p>
+<p>导航数据在存储的时候，按照存储方式不同，分为BLOBS（二进制流）和relational(关系表)</p>
+<p>每个Feature都有唯一的坐标点，可以通过地理位置来查找坐标点</p>
+<p><strong>Tiles 的优点：</strong></p>
+<p>​		通过一次访问数据库，可以把同一地理范围内的所有相关数据都加载进来，提高地图显示和路径规划的性能；</p>
+<p>​		tiles作为数据更新的单位，只需要对每一个tile记录一个版本信息，节省大量的数据空间</p>
+<p>​		tile实现对feature的分层引用，</p>
+<p>​		tiling scheme 应用<strong>BLOB</strong>方式存储， BMD、 routing、lane等,按照tile方式分隔数据，按tile划分数据后，通过一个快速查找周围的数据；</p>
+<p><strong>Tile and level</strong></p>
+<p>level的概念：在一个level上对应的所有tile刚好覆盖了整个地球表面，在同一个level的每个tile的边界宽度都是在固定的经纬度宽，同一level的tile在wgs84坐标系统中大小是一致的。</p>
+<p><strong>Level划分</strong>：不同比例尺下，可以看到不同颗粒度的地图信息</p>
+<p><strong>地图块</strong>：将整个地图换分为众多小格子，便于地图数据的更新维护</p>
+<p><strong>最高level（level 0）</strong> 只包含<strong>2个tiles</strong>,到下一级leve时，每个当前level的tile分割成下一级level的 4个大小一样的tiles,</p>
+<p><strong>最低level (level 15)</strong></p>
+<p>NDS使用<strong>level</strong> <strong>13</strong> 定义最详细的路网数据，在routing data中没有比level13更低的数据</p>
+<p>对于低于level13的level是留给map display使用了，比如存储详细的city map在level 14中</p>
+<p>NDS使用中心点作为其tile的anchor point。tile中的点坐标在存储的时候，只是存储相对于anchor point的offset。在存储link的shapepoint时候，第一个点为相对anchor point的offset，其后的点就是相对前一个点的offset。</p>
+<p>（route link虽然也是横跨多个tile，但是route link不会被切分，route link从属于其start node所在的tile。route link是一个逻辑feature，本身没有geometry信息，其geometry信息被提取出来单独做成另一个feature：geo line，所以route link对应的geo line将会被切分。具体细节以后讨论。）</p>
+<p>feature被切分后，原来feature所对应的关联信息（比如name object）会都保留到切分后的feature上</p>
+<h4 id="5-坐标计算相关"><a href="#5-坐标计算相关" class="headerlink" title="5. 坐标计算相关"></a>5. 坐标计算相关</h4><h6 id="1-一个线段，给定旋转角度，计算旋转后的点坐标"><a href="#1-一个线段，给定旋转角度，计算旋转后的点坐标" class="headerlink" title="1. 一个线段，给定旋转角度，计算旋转后的点坐标"></a>1. 一个线段，给定旋转角度，计算旋转后的点坐标</h6><p>理解：</p>
+<p>在直角坐标中，有p(x, y)，直线op长度为r，直线op和x轴正向夹角为a。直线op围绕原点做逆时针方向b度的旋转，到达p’ (s,t)，如下图。</p>
+<p><img src="https://img-blog.csdnimg.cn/20200302210437662.gif?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3N1bnJpdmVyMjAwMA==,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload alt="img"></p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs tex">s = r cos(a + b) = r cos(a)cos(b) – r sin(a)sin(b)   (1.1)<br>t = r sin(a + b) = r sin(a)cos(b) + r cos(a)sin(b)   (1.2)<br> <br>其中 x = r cos(a) , y = r sin(a)<br>代入(1.1), (1.2) ,<br> <br>s = x cos(b) – y sin(b)    (1.3)<br>t = x sin(b) + y cos(b)    (1.4)<br></code></pre></td></tr></table></figure>
+
+<p>代码实现：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">RotationTransform</span><span class="hljs-params">(<span class="hljs-type">const</span> Coord &amp;clOriP, <span class="hljs-type">const</span> Coord &amp;clRotatedP, <span class="hljs-type">const</span> <span class="hljs-type">double</span> angle, Coord &amp;clPoint)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-type">double</span> dRadian = angle * PI / <span class="hljs-number">180.0f</span>;<br><br>	clPoint.X = clOriP.X + (clRotatedP.X - clOriP.X) * <span class="hljs-built_in">cos</span>(dRadian) - (clRotatedP.Y - clOriP.Y) * <span class="hljs-built_in">sin</span>(dRadian);<br>	clPoint.Y = clOriP.Y + (clRotatedP.X - clOriP.X) * <span class="hljs-built_in">sin</span>(dRadian) + (clRotatedP.Y - clOriP.Y) * <span class="hljs-built_in">cos</span>(dRadian);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h6 id="2-判断线段的位置"><a href="#2-判断线段的位置" class="headerlink" title="2. 判断线段的位置"></a>2. 判断线段的位置</h6><p>判断两根Link的相对位置</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function">TurnDirection <span class="hljs-title">DetermineTurnDirection</span><span class="hljs-params">(<span class="hljs-type">const</span> &amp;nextLink, <span class="hljs-type">const</span> &amp;otherLink,<span class="hljs-type">bool</span> IsMerge)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span> (nextLink.link_index == <span class="hljs-number">313</span> &amp;&amp; nextLink.tile_id == <span class="hljs-number">557546882</span>) &#123;<br>        std::cout &lt;&lt; <span class="hljs-string">&quot;&quot;</span>;<br>    &#125;<br>    <span class="hljs-comment">//查找交点</span><br>    nav::geo::Wgs84 p0;<br>    nav::geo::Wgs84 p1;<br>    nav::geo::Wgs84 p2;<br><br>    <span class="hljs-keyword">if</span> (IsMerge) &#123;<br>        p0 = nextLink.clEndPoint;<br>        p1 = nextLink.clstartPoint;<br>        p2 = otherLink.clstartPoint;<br>    &#125;<br>    <span class="hljs-keyword">else</span> &#123;<br>        p0 = nextLink.clstartPoint;<br>        p1 = nextLink.clEndPoint;<br>        p2 = otherLink.clEndPoint;<br>    &#125;<br><br>    <span class="hljs-type">double</span> ax = p<span class="hljs-number">1.</span><span class="hljs-built_in">getLongitude</span>()- p<span class="hljs-number">0.</span><span class="hljs-built_in">getLongitude</span>();<br>    <span class="hljs-type">double</span> ay = p<span class="hljs-number">1.</span><span class="hljs-built_in">getLatitude</span>() - p<span class="hljs-number">0.</span><span class="hljs-built_in">getLatitude</span>();<br>    <span class="hljs-type">double</span> bx = p<span class="hljs-number">2.</span><span class="hljs-built_in">getLongitude</span>() - p<span class="hljs-number">0.</span><span class="hljs-built_in">getLongitude</span>();<br>    <span class="hljs-type">double</span> by = p<span class="hljs-number">2.</span><span class="hljs-built_in">getLatitude</span>() - p<span class="hljs-number">0.</span><span class="hljs-built_in">getLatitude</span>();<br>    <span class="hljs-comment">//向量(ax,ay,0)叉乘向量(bx,by,0)得到的向量为(0,0,ab),由ab的正负和观察方向界定左右</span><br>    <span class="hljs-type">double</span> ab = (ax*by - ay * bx);<br>    <span class="hljs-keyword">if</span> (ab - <span class="hljs-number">0.00000000</span> &gt; <span class="hljs-number">0.00000000</span>) &#123;<br>        <span class="hljs-keyword">return</span> IsMerge ? TurnDirection::LEFT: TurnDirection::RIGHT;<br>    &#125;<br>    <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">return</span> IsMerge?TurnDirection::RIGHT: TurnDirection::LEFT;<br>    &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Gis/" class="print-no-link">#Gis</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>坐标以及tile mesh 的转换</div>
+      <div>http://example.com/2024/11/05/坐标及TileMesh转换/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>sunyanan</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年11月5日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/11/05/%E5%9C%B0%E5%9B%BE%E5%86%85%E5%AE%B9%E5%8F%8A%E4%BD%BF%E7%94%A8%E4%BA%86%E8%A7%A3/" title="地图了解">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">地图了解</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/11/05/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F/" title="数据格式">
+                        <span class="hidden-mobile">数据格式</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
