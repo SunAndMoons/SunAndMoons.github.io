@@ -26,11 +26,13 @@
 <meta property="og:site_name" content="SunAndMoons">
 <meta property="og:description" content="1. 前言ASAM OpenDrive 描述驾驶仿真应用所需的静态道路交通网络（路网），并提供了标准交换格式的说明文档。 对道路以及道路上的物体进行表述，道路、查到、交叉路口等内容进行建模。 使用文件扩展名为 .xord  xml文件作为描述路网的基础。通过 node 被构建，用户可自定义数据扩展结点。 1.1 单位若没有特殊说明，所有数据采用SI单位：  length: [m] angle:[r">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/image%5Ccoo_sys_overview.png">
 <meta property="article:published_time" content="2024-11-07T07:50:32.000Z">
-<meta property="article:modified_time" content="2024-11-07T08:16:32.390Z">
+<meta property="article:modified_time" content="2024-11-08T02:24:43.044Z">
 <meta property="article:author" content="sunyanan">
 <meta property="article:tag" content="Gis">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/image%5Ccoo_sys_overview.png">
   
   
   
@@ -223,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          139 字
+          400 字
         
       </span>
     
@@ -234,7 +236,7 @@
         
         
         
-          2 分钟
+          4 分钟
         
       </span>
     
@@ -276,17 +278,122 @@
             
               <div class="markdown-body">
                 
-                <h4 id=""><a href="#" class="headerlink" title=""></a></h4><h4 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h4><p>ASAM OpenDrive 描述驾驶仿真应用所需的<strong>静态</strong>道路交通网络（路网），并提供了标准交换格式的说明文档。</p>
+                <h4 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h4><p>ASAM OpenDrive 描述驾驶仿真应用所需的<strong>静态</strong>道路交通网络（路网），并提供了标准交换格式的说明文档。</p>
 <p>对道路以及道路上的物体进行表述，道路、查到、交叉路口等内容进行建模。</p>
 <p>使用文件扩展名为 <em>.xord</em>  xml文件作为描述路网的基础。通过 node 被构建，用户可自定义数据扩展结点。</p>
-<h6 id="1-1-单位"><a href="#1-1-单位" class="headerlink" title="1.1 单位"></a>1.1 单位</h6><p>若没有特殊说明，所有数据采用SI单位：</p>
+<h5 id="1-1-单位"><a href="#1-1-单位" class="headerlink" title="1.1 单位"></a>1.1 单位</h5><p>若没有特殊说明，所有数据采用SI单位：</p>
 <ul>
 <li>length: [m]</li>
 <li>angle:[rad]</li>
 <li>time:[s]</li>
 <li>speed: [m&#x2F;s]</li>
 </ul>
-<p>s</p>
+<h5 id="1-2-曲率"><a href="#1-2-曲率" class="headerlink" title="1.2 曲率"></a>1.2 曲率</h5><p>​	曲率&#x3D; 1&#x2F;曲率半径</p>
+<ul>
+<li>正曲率：左曲线（逆时针运动）</li>
+<li>负曲率：右曲线（顺时针运动）</li>
+</ul>
+<h4 id="2-通用架构"><a href="#2-通用架构" class="headerlink" title="2. 通用架构"></a>2. 通用架构</h4><h5 id="2-1-文件结构"><a href="#2-1-文件结构" class="headerlink" title="2.1 文件结构"></a>2.1 文件结构</h5><p>数据存储在XML文件中，文件扩展名为 <em>.xord</em>， 压缩文件的扩展名为 <em>.xordz</em>。</p>
+<h5 id="2-2-头文件"><a href="#2-2-头文件" class="headerlink" title="2.2 头文件"></a>2.2 头文件</h5><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">header</span> <span class="hljs-attr">revMajor</span>=<span class="hljs-string">&quot;1&quot;</span> <span class="hljs-attr">revMinor</span>=<span class="hljs-string">&quot;4&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;&quot;</span> <span class="hljs-attr">version</span>=<span class="hljs-string">&quot;1.00&quot;</span> <span class="hljs-attr">date</span>=<span class="hljs-string">&quot;Thu Dec 10 10:35:57 2009&quot;</span> <span class="hljs-attr">north</span>=<span class="hljs-string">&quot;0.0000000000000000e+00&quot;</span> <span class="hljs-attr">south</span>=<span class="hljs-string">&quot;0.0000000000000000e+00&quot;</span> <span class="hljs-attr">east</span>=<span class="hljs-string">&quot;0.0000000000000000e+00&quot;</span> <span class="hljs-attr">west</span>=<span class="hljs-string">&quot;0.0000000000000000e+00&quot;</span> <span class="hljs-attr">maxRoad</span>=<span class="hljs-string">&quot;517&quot;</span> <span class="hljs-attr">maxJunc</span>=<span class="hljs-string">&quot;2&quot;</span> <span class="hljs-attr">maxPrg</span>=<span class="hljs-string">&quot;0&quot;</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">header</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>单位</th>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>revMajor</td>
+<td>ushort</td>
+<td>-</td>
+<td>1</td>
+<td>格式主版本号</td>
+</tr>
+<tr>
+<td>revMinor</td>
+<td>ushort</td>
+<td>-</td>
+<td>4</td>
+<td>格式次版本号</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>-</td>
+<td>-</td>
+<td>数据库名称</td>
+</tr>
+<tr>
+<td>version</td>
+<td>string</td>
+<td>-</td>
+<td>-</td>
+<td>本路网的版本号</td>
+</tr>
+<tr>
+<td>date</td>
+<td>string</td>
+<td>-</td>
+<td>-</td>
+<td>数据库创建的时间</td>
+</tr>
+<tr>
+<td>north</td>
+<td>double</td>
+<td>m</td>
+<td>-</td>
+<td>最大惯性y值</td>
+</tr>
+<tr>
+<td>south</td>
+<td>double</td>
+<td>m</td>
+<td>-</td>
+<td>最小惯性y值</td>
+</tr>
+<tr>
+<td>east</td>
+<td>double</td>
+<td>m</td>
+<td>-</td>
+<td>最大惯性x值</td>
+</tr>
+<tr>
+<td>west</td>
+<td>double</td>
+<td>m</td>
+<td>-</td>
+<td>最小惯性x值</td>
+</tr>
+<tr>
+<td>vendor</td>
+<td>string</td>
+<td>-</td>
+<td>-</td>
+<td>开发商名称</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="3-坐标系"><a href="#3-坐标系" class="headerlink" title="3. 坐标系"></a>3. 坐标系</h4><p>OPENDRIVE 使用三种类型的坐标系。</p>
+<ul>
+<li><p>惯性x&#x2F;y&#x2F;z轴坐标系</p>
+</li>
+<li><p>参考线s&#x2F;t&#x2F;h轴坐标系</p>
+</li>
+<li><p>局部u&#x2F;v&#x2F;z轴坐标系</p>
+<p><img src="/image%5Ccoo_sys_overview.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+</ul>
 
                 
               </div>
@@ -360,8 +467,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/11/05/git/" title="Git">
-                        <span class="hidden-mobile">Git</span>
+                      <a href="/2024/11/05/cmake/" title="cmake">
+                        <span class="hidden-mobile">cmake</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
