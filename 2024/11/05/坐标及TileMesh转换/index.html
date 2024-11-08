@@ -26,15 +26,15 @@
 <meta property="og:site_name" content="SunAndMoons">
 <meta property="og:description" content="坐标及Tile|Mesh转换1.不同的坐标系1.1 WGS84坐标​		地球坐标系：GPS&#x2F;谷歌地图卫星（客户需要的坐标） 1.2 GCJ02坐标​		火星坐标系：中国国家测绘局定制的地理信息系统的坐标系统，在中国使用的地图产品必须是加密后的坐标，GCJ02为WGS84坐标加密后；主要产品：高德地图、腾讯地图、阿里云地图、谷歌国内地图 1.3 BD09坐标​		百度坐标系。在GCJ02的">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/..%5Cimage%5Cimage-20241106152704048.png">
+<meta property="og:image" content="http://example.com/image%5Cimage-20241106152704048.png">
 <meta property="og:image" content="http://example.com/..%5Cimage%5Cimage-20231229150230040.png">
 <meta property="og:image" content="http://example.com/..%5Cimage%5C20200302210437662.png">
 <meta property="article:published_time" content="2024-11-05T09:08:20.000Z">
-<meta property="article:modified_time" content="2024-11-08T02:33:59.283Z">
+<meta property="article:modified_time" content="2024-11-08T02:36:04.547Z">
 <meta property="article:author" content="sunyanan">
 <meta property="article:tag" content="Gis">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/..%5Cimage%5Cimage-20241106152704048.png">
+<meta name="twitter:image" content="http://example.com/image%5Cimage-20241106152704048.png">
   
   
   
@@ -283,7 +283,7 @@
                 <h2 id="坐标及Tile-Mesh转换"><a href="#坐标及Tile-Mesh转换" class="headerlink" title="坐标及Tile|Mesh转换"></a>坐标及Tile|Mesh转换</h2><h3 id="1-不同的坐标系"><a href="#1-不同的坐标系" class="headerlink" title="1.不同的坐标系"></a>1.不同的坐标系</h3><h4 id="1-1-WGS84坐标"><a href="#1-1-WGS84坐标" class="headerlink" title="1.1 WGS84坐标"></a>1.1 WGS84坐标</h4><p>​		地球坐标系：GPS&#x2F;谷歌地图卫星（客户需要的坐标）</p>
 <h4 id="1-2-GCJ02坐标"><a href="#1-2-GCJ02坐标" class="headerlink" title="1.2 GCJ02坐标"></a>1.2 GCJ02坐标</h4><p>​		火星坐标系：中国国家测绘局定制的地理信息系统的坐标系统，在中国使用的地图产品必须是加密后的坐标，GCJ02为WGS84坐标加密后；主要产品：高德地图、腾讯地图、阿里云地图、谷歌国内地图</p>
 <h4 id="1-3-BD09坐标"><a href="#1-3-BD09坐标" class="headerlink" title="1.3 BD09坐标"></a>1.3 BD09坐标</h4><p>​		百度坐标系。在GCJ02的基础上进行了二次加密</p>
-<h4 id="1-4-NDS坐标"><a href="#1-4-NDS坐标" class="headerlink" title="1.4 NDS坐标"></a>1.4 NDS坐标</h4><p>将经度映射到<br>$$<br>[-2^{31},2^{31})<br>$$<br>将纬度映射到<br>$$<br>[-2^{30},2^{30})<br>$$<br><img src="/..%5Cimage%5Cimage-20241106152704048.png" srcset="/img/loading.gif" lazyload alt="image-20241106152704048"></p>
+<h4 id="1-4-NDS坐标"><a href="#1-4-NDS坐标" class="headerlink" title="1.4 NDS坐标"></a>1.4 NDS坐标</h4><p>将经度映射到<br>$$<br>[-2^{31},2^{31})<br>$$<br>将纬度映射到<br>$$<br>[-2^{30},2^{30})<br>$$<br><img src="/image%5Cimage-20241106152704048.png" srcset="/img/loading.gif" lazyload alt="image-20241106152704048"></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//02坐标系向nds坐标系转换</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">Cnv02Coord2NdsCoord</span><span class="hljs-params">(<span class="hljs-type">double</span> d)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">return</span> d * <span class="hljs-number">2147483648.0</span> / <span class="hljs-number">180.0</span>;<br>    <span class="hljs-keyword">return</span> d* (<span class="hljs-number">1</span>&lt;&lt;<span class="hljs-number">30</span>)/<span class="hljs-number">90</span><br>&#125;<br><br><span class="hljs-comment">// NDS坐标系向02坐标系转换</span><br><span class="hljs-type">double</span> <span class="hljs-built_in">CnvNdsCoordTo02Coord</span>(<span class="hljs-type">int</span> iCoord)<br>&#123;<br>	<span class="hljs-built_in">return</span> ((<span class="hljs-type">double</span>)iCoord) * <span class="hljs-number">180.0</span> / <span class="hljs-number">2147483648.0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
 
 <p>Morton Codes</p>
