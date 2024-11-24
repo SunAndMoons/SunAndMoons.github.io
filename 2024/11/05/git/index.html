@@ -19,22 +19,22 @@
   <meta name="author" content="sunyanan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="vector 的扩容机制是动态数组管理内存和存储空间的重要策略。  扩容触发条件当向vector 插入新元素时，如果当前容量不足以容纳新元素，就会触发扩容机制。当前元素末尾指针等于 end_of_storage （容量的末尾指针），就需要进行扩容。  扩容方式2倍：显著减少内存分配的次数，提升性能，并减少内存碎片。1.5倍：在节省空间的同时，可能会增加扩容的频率。  扩容过程  申请新内存：根据扩">
+    <meta name="description" content="示例12345git clone  --recursive &#x2F;&#x2F;递归的方式克隆整个项目, 包含子项目git submodule add   &#x2F;&#x2F;添加子模块git submodule init &#x2F;&#x2F;初始化子模块git submodule update &#x2F;&#x2F;更新子模块git submodule foreach git pull &#x2F;&#x2F;拉取所有子模块  查看所有分支git branch -a 创建分支gi">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vector扩容">
-<meta property="og:url" content="http://example.com/2024/11/03/vector%E6%89%A9%E5%AE%B9/index.html">
+<meta property="og:title" content="Git">
+<meta property="og:url" content="http://example.com/2024/11/05/git/index.html">
 <meta property="og:site_name" content="SunAndMoons">
-<meta property="og:description" content="vector 的扩容机制是动态数组管理内存和存储空间的重要策略。  扩容触发条件当向vector 插入新元素时，如果当前容量不足以容纳新元素，就会触发扩容机制。当前元素末尾指针等于 end_of_storage （容量的末尾指针），就需要进行扩容。  扩容方式2倍：显著减少内存分配的次数，提升性能，并减少内存碎片。1.5倍：在节省空间的同时，可能会增加扩容的频率。  扩容过程  申请新内存：根据扩">
+<meta property="og:description" content="示例12345git clone  --recursive &#x2F;&#x2F;递归的方式克隆整个项目, 包含子项目git submodule add   &#x2F;&#x2F;添加子模块git submodule init &#x2F;&#x2F;初始化子模块git submodule update &#x2F;&#x2F;更新子模块git submodule foreach git pull &#x2F;&#x2F;拉取所有子模块  查看所有分支git branch -a 创建分支gi">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-11-03T12:44:04.000Z">
-<meta property="article:modified_time" content="2024-11-03T12:53:51.666Z">
+<meta property="article:published_time" content="2024-11-05T09:08:20.000Z">
+<meta property="article:modified_time" content="2024-11-10T01:35:32.888Z">
 <meta property="article:author" content="sunyanan">
-<meta property="article:tag" content="cpp">
+<meta property="article:tag" content="Git">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>vector扩容 - SunAndMoons</title>
+  <title>Git - SunAndMoons</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -200,7 +200,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="vector扩容"></span>
+            <span id="subtitle" data-typed-text="Git"></span>
           
         </div>
 
@@ -211,8 +211,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-11-03 20:44" pubdate>
-          2024年11月3日 晚上
+        <time datetime="2024-11-05 17:08" pubdate>
+          2024年11月5日 下午
         </time>
       </span>
     
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          205 字
+          143 字
         
       </span>
     
@@ -271,25 +271,30 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">vector扩容</h1>
+            <h1 id="seo-header">Git</h1>
             
             
               <div class="markdown-body">
                 
-                <p>vector 的扩容机制是动态数组管理内存和存储空间的重要策略。</p>
-<ol>
-<li><p>扩容触发条件<br>当向vector 插入新元素时，如果当前容量不足以容纳新元素，就会触发扩容机制。<br>当前元素末尾指针等于 end_of_storage （容量的末尾指针），就需要进行扩容。</p>
-</li>
-<li><p>扩容方式<br>2倍：显著减少内存分配的次数，提升性能，并减少内存碎片。<br>1.5倍：在节省空间的同时，可能会增加扩容的频率。</p>
-</li>
-<li><p>扩容过程</p>
-<ul>
-<li>申请新内存：根据扩容策略，申请一块更大的内存空间；</li>
-<li>数据拷贝：将原内存中的数据拷贝到新申请的内存空间中；</li>
-<li>释放原内存：将内存空间释放，以避免内存泄露。</li>
-</ul>
-</li>
+                <h6 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span>  --recursive //递归的方式克隆整个项目, 包含子项目<br>git submodule add   //添加子模块<br>git submodule init //初始化子模块<br>git submodule update //更新子模块<br>git submodule foreach git pull //拉取所有子模块<br></code></pre></td></tr></table></figure>
+
+<h6 id="查看所有分支"><a href="#查看所有分支" class="headerlink" title="查看所有分支"></a>查看所有分支</h6><p><code>git branch -a</code></p>
+<h6 id="创建分支"><a href="#创建分支" class="headerlink" title="创建分支"></a>创建分支</h6><p><code>git branch L2Map_New_RampAssist</code></p>
+<h6 id="切换分支"><a href="#切换分支" class="headerlink" title="切换分支"></a>切换分支</h6><p><code>git checkout L2Map_New_RampAssist</code></p>
+<h6 id="创建-切换分支"><a href="#创建-切换分支" class="headerlink" title="创建+切换分支"></a>创建+切换分支</h6><p><code>git checkout -b L2Map_New_RampAssist</code></p>
+<h5 id="将本地分支同步到远程"><a href="#将本地分支同步到远程" class="headerlink" title="将本地分支同步到远程"></a>将本地分支同步到远程</h5><p><code>git push origin L2Map_New_RampAssist:L2Map_New_RampAssist</code></p>
+<h6 id="删除远程分支"><a href="#删除远程分支" class="headerlink" title="删除远程分支"></a>删除远程分支</h6><p><code>git push origin -d branch_name</code></p>
+<h6 id="所有子模块切换到master分支"><a href="#所有子模块切换到master分支" class="headerlink" title="所有子模块切换到master分支"></a>所有子模块切换到master分支</h6><p><code>git submodule foreach git checkout master </code></p>
+<h6 id="添加submodel"><a href="#添加submodel" class="headerlink" title="添加submodel"></a>添加submodel</h6><ol>
+<li>clone 代码，生成文件夹</li>
+<li>在代码的最外层</li>
 </ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">git pull <br>git submodule add git@gitlab.navinfo.com:compiler/sdpro_mmt/sdpro_mmt_makeobjectdata.git ./compiler/SDPro_MMT/SDPro_MMT_MakeObjectData <br><br></code></pre></td></tr></table></figure>
+
+<h6 id="clone-使用https"><a href="#clone-使用https" class="headerlink" title="clone 使用https"></a>clone 使用https</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">git config --global --<span class="hljs-built_in">unset</span> http.proxy<br>git config --global --<span class="hljs-built_in">unset</span> https.proy<br></code></pre></td></tr></table></figure>
+
+<h6 id="Clone指定版本代码"><a href="#Clone指定版本代码" class="headerlink" title="Clone指定版本代码"></a>Clone指定版本代码</h6><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">git</span> checkout 版本号<br></code></pre></td></tr></table></figure>
+
 
                 
               </div>
@@ -298,32 +303,11 @@
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/cpp/" class="category-chain-item">cpp</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
   
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/cpp/" class="print-no-link">#cpp</a>
+        <a href="/tags/Git/" class="print-no-link">#Git</a>
       
     </div>
   
@@ -335,8 +319,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>vector扩容</div>
-      <div>http://example.com/2024/11/03/vector扩容/</div>
+      <div>Git</div>
+      <div>http://example.com/2024/11/05/git/</div>
     </div>
     <div class="license-meta">
       
@@ -348,7 +332,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年11月3日</div>
+          <div>2024年11月5日</div>
         </div>
       
       
@@ -380,9 +364,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/11/05/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F/" title="数据格式">
+                      <a href="/2024/11/05/linux/" title="linux">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">数据格式</span>
+                        <span class="hidden-mobile">linux</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -390,8 +374,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/10/22/%E5%9B%9E%E6%BA%AF/" title="回溯">
-                        <span class="hidden-mobile">回溯</span>
+                      <a href="/2024/11/05/%E5%9C%B0%E5%9B%BE%E5%86%85%E5%AE%B9%E5%8F%8A%E4%BD%BF%E7%94%A8%E4%BA%86%E8%A7%A3/" title="地图了解">
+                        <span class="hidden-mobile">地图了解</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
