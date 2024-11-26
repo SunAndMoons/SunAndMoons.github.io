@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>动态规划</title>
+    <link href="/2024/11/26/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+    <url>/2024/11/26/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/</url>
+    
+    <content type="html"><![CDATA[<p>动态规划步骤：</p><ol><li>确定dp数组以及下标的含义</li><li>确定递推公式</li><li>dp数据如何进行初始化</li><li>确定遍历顺序</li><li>举例推导dp数组</li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>刷题</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>笔试</title>
     <link href="/2024/11/24/%E7%AC%94%E8%AF%95/"/>
     <url>/2024/11/24/%E7%AC%94%E8%AF%95/</url>
@@ -105,25 +124,6 @@
   
   
   <entry>
-    <title>linux</title>
-    <link href="/2024/11/05/linux/"/>
-    <url>/2024/11/05/linux/</url>
-    
-    <content type="html"><![CDATA[<h6 id="1-显示所有包含关键字的进程"><a href="#1-显示所有包含关键字的进程" class="headerlink" title="1.显示所有包含关键字的进程"></a>1.显示所有包含关键字的进程</h6><p>管道符 “|” 用来隔开两个命令，管道符左边命令的输出会作为管道符右边命令的输入;</p><p>grep 命令用来查找文件里符合条件的字符串或正则表达式</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">ps -ef | grep XXX<br></code></pre></td></tr></table></figure><h6 id="2-kill"><a href="#2-kill" class="headerlink" title="2. kill"></a>2. kill</h6><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-built_in">kill</span> pid<br><span class="hljs-built_in">kill</span> -9 pid //强制杀死<br></code></pre></td></tr></table></figure><h6 id="3-ip相关"><a href="#3-ip相关" class="headerlink" title="3.ip相关"></a>3.ip相关</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash">//install<br>apt-get install net-tools<br>//获取IP地址<br>ip addr<br><br>//只获取IP地址<br>ip addr | grep <span class="hljs-string">&#x27;inet &#x27;</span> | grep -v <span class="hljs-string">&#x27;127.0.0.1&#x27;</span> | awk <span class="hljs-string">&#x27;&#123;print $2&#125;&#x27;</span> | <span class="hljs-built_in">cut</span> -f1 -d<span class="hljs-string">&#x27;/&#x27;</span><br><br></code></pre></td></tr></table></figure><h6 id="4-tar"><a href="#4-tar" class="headerlink" title="4.tar"></a>4.tar</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">//将 .tar.gz 文件解压缩到不同的工作目录<br>tar -xvf /tmp/mapdata.tar.gz -C /userdata/map/mapdata<br></code></pre></td></tr></table></figure><h5 id="5-cmake"><a href="#5-cmake" class="headerlink" title="5.cmake"></a>5.cmake</h5><p>安装boost库</p><figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs q">sudo apt-<span class="hljs-built_in">get</span> install libboost-<span class="hljs-built_in">all</span>-<span class="hljs-built_in">dev</span> -y<br></code></pre></td></tr></table></figure>]]></content>
-    
-    
-    
-    <tags>
-      
-      <tag>linux</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>Git</title>
     <link href="/2024/11/05/git/"/>
     <url>/2024/11/05/git/</url>
@@ -135,6 +135,25 @@
     <tags>
       
       <tag>Git</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>linux</title>
+    <link href="/2024/11/05/linux/"/>
+    <url>/2024/11/05/linux/</url>
+    
+    <content type="html"><![CDATA[<h6 id="1-显示所有包含关键字的进程"><a href="#1-显示所有包含关键字的进程" class="headerlink" title="1.显示所有包含关键字的进程"></a>1.显示所有包含关键字的进程</h6><p>管道符 “|” 用来隔开两个命令，管道符左边命令的输出会作为管道符右边命令的输入;</p><p>grep 命令用来查找文件里符合条件的字符串或正则表达式</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">ps -ef | grep XXX<br></code></pre></td></tr></table></figure><h6 id="2-kill"><a href="#2-kill" class="headerlink" title="2. kill"></a>2. kill</h6><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-built_in">kill</span> pid<br><span class="hljs-built_in">kill</span> -9 pid //强制杀死<br></code></pre></td></tr></table></figure><h6 id="3-ip相关"><a href="#3-ip相关" class="headerlink" title="3.ip相关"></a>3.ip相关</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash">//install<br>apt-get install net-tools<br>//获取IP地址<br>ip addr<br><br>//只获取IP地址<br>ip addr | grep <span class="hljs-string">&#x27;inet &#x27;</span> | grep -v <span class="hljs-string">&#x27;127.0.0.1&#x27;</span> | awk <span class="hljs-string">&#x27;&#123;print $2&#125;&#x27;</span> | <span class="hljs-built_in">cut</span> -f1 -d<span class="hljs-string">&#x27;/&#x27;</span><br><br></code></pre></td></tr></table></figure><h6 id="4-tar"><a href="#4-tar" class="headerlink" title="4.tar"></a>4.tar</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">//将 .tar.gz 文件解压缩到不同的工作目录<br>tar -xvf /tmp/mapdata.tar.gz -C /userdata/map/mapdata<br></code></pre></td></tr></table></figure><h5 id="5-cmake"><a href="#5-cmake" class="headerlink" title="5.cmake"></a>5.cmake</h5><p>安装boost库</p><figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs q">sudo apt-<span class="hljs-built_in">get</span> install libboost-<span class="hljs-built_in">all</span>-<span class="hljs-built_in">dev</span> -y<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>linux</tag>
       
     </tags>
     
