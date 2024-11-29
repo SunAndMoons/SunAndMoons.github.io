@@ -27,7 +27,7 @@
 <meta property="og:description" content="一. static在c++中，static 是一个非常重要的修饰符，可以应用于变量、函数、成员函数和成员变量。 1.静态局部变量作用域函数内部的局部变量时，该变量的生命周期被延长到整个程序的生命周期， 但其作用域仍然限制到定义其的函数内部。即使函数执行完毕，该变量的值也会保留到下次该函数被调用时。这种特性能够使得函数能够‘记住’之前的状态。 static 修饰的局部变量的存储位置在程序执行执行期间">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-11-28T08:03:13.000Z">
-<meta property="article:modified_time" content="2024-11-28T08:21:50.785Z">
+<meta property="article:modified_time" content="2024-11-29T06:12:19.353Z">
 <meta property="article:author" content="sunyanan">
 <meta property="article:tag" content="cpp">
 <meta name="twitter:card" content="summary_large_image">
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.4k 字
+          2.7k 字
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          20 分钟
+          23 分钟
         
       </span>
     
@@ -340,6 +340,18 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span>&#123;&#125;;<br>A a;<br><span class="hljs-keyword">auto</span> c=std::<span class="hljs-built_in">move</span>(a);<span class="hljs-comment">//std::move(a)是将亡值</span><br><span class="hljs-keyword">auto</span> d= <span class="hljs-built_in">static_cast</span>&lt;A&amp;&amp;&gt;(a);<span class="hljs-comment">//static_cast&lt;A&amp;&amp;&gt;（a） 是将亡值。</span><br></code></pre></td></tr></table></figure>
 
 <h5 id="7-右值引用"><a href="#7-右值引用" class="headerlink" title="7.右值引用"></a>7.右值引用</h5><p>为了实现转移语义和完美转发，消除两个对象交互式不必要的对象拷贝，也能够更加简洁明确的定义泛型函数。</p>
+<h3 id="四-内联函数"><a href="#四-内联函数" class="headerlink" title="四. 内联函数"></a>四. 内联函数</h3><p>在调用是直接在调用点处展开，减少函数调用</p>
+<h3 id="五-volatile"><a href="#五-volatile" class="headerlink" title="五. volatile"></a>五. volatile</h3><h5 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h5><p>当对象的值可能在程序的控制或者检测之外被改变时，应该将对象声明为volatile, 告知编译器不应对这样的对象进行优化。修饰变量后，提醒编译器变量随时都有可能发生改变，编译后的数据每次读取都是从变量地址中读取数据。如果没有，编译器可能优化读取和存储，可能暂时使用寄存器中的值。如果变量有别的程序更新了，将会出现不一致的现象。</p>
+<ul>
+<li>阻止编译器为了提高速度将一个变量缓存到寄存器不写会。</li>
+<li>阻止编译器调整操作  vilatile变量的指令排序</li>
+</ul>
+<h5 id="2-应用场景"><a href="#2-应用场景" class="headerlink" title="2. 应用场景"></a>2. 应用场景</h5><p>除了操纵硬件需要用到外，更多可能是多线程并发访问共享变量时，一个线程改变了变量的值，如果想改变后的值对其他线程可见，就需要使用 <strong>volatile</strong> 修改。</p>
+<ul>
+<li>中断服务程序中修改的供其他程序检测的变量需要加</li>
+<li>多任务环境下各任务间共享的标志</li>
+<li>存储器映射的硬件寄存器</li>
+</ul>
 
                 
               </div>
