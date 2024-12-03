@@ -19,22 +19,24 @@
   <meta name="author" content="sunyanan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1. 事务的四大特性 原子性： 事务是最小的执行单位，不可分割。事务的原子性确保动作要全部执行，要么全部不执行。 一致性：事务完成时，数据必须处于一致状态，多个事对于同一个数据读取的结果是相同的。 隔离性：并发访问数据库时，一个事务不被其他事务所干扰，各个事务不干涉内部的数据。 持久性：事务被提交后，对数据库中的数据改变时持久的。  2. 事务之间的相互影响 脏读：一个事务读取了另一个事务未提交的">
+    <meta name="description" content="图形渲染管线OpenGL的图形渲染管线（Graphics Pipeline，大多译为管线，实际上指的是一堆原始图形数据途经一个输送管道，期间经过各种变化处理最终出现在屏幕的过程） 3D坐标转为2D坐标的处理过程是由OpenGL的图形渲染管线管理的。 图形渲染管线可以被划分为两个主要部分：第一部分把你的3D坐标转换为2D坐标，第二部分是把2D坐标转变为实际的有颜色的像素。这个教程里，我们会简单地讨论">
 <meta property="og:type" content="article">
-<meta property="og:title" content="database">
-<meta property="og:url" content="http://example.com/2024/12/02/database/index.html">
+<meta property="og:title" content="OpenGl">
+<meta property="og:url" content="http://example.com/2024/12/03/OpenGl/index.html">
 <meta property="og:site_name" content="SunAndMoons">
-<meta property="og:description" content="1. 事务的四大特性 原子性： 事务是最小的执行单位，不可分割。事务的原子性确保动作要全部执行，要么全部不执行。 一致性：事务完成时，数据必须处于一致状态，多个事对于同一个数据读取的结果是相同的。 隔离性：并发访问数据库时，一个事务不被其他事务所干扰，各个事务不干涉内部的数据。 持久性：事务被提交后，对数据库中的数据改变时持久的。  2. 事务之间的相互影响 脏读：一个事务读取了另一个事务未提交的">
+<meta property="og:description" content="图形渲染管线OpenGL的图形渲染管线（Graphics Pipeline，大多译为管线，实际上指的是一堆原始图形数据途经一个输送管道，期间经过各种变化处理最终出现在屏幕的过程） 3D坐标转为2D坐标的处理过程是由OpenGL的图形渲染管线管理的。 图形渲染管线可以被划分为两个主要部分：第一部分把你的3D坐标转换为2D坐标，第二部分是把2D坐标转变为实际的有颜色的像素。这个教程里，我们会简单地讨论">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-12-02T03:03:16.000Z">
-<meta property="article:modified_time" content="2024-12-02T06:00:19.212Z">
+<meta property="og:image" content="http://example.com/GraphicsPipeline.png">
+<meta property="article:published_time" content="2024-12-03T06:11:40.000Z">
+<meta property="article:modified_time" content="2024-12-03T06:37:16.378Z">
 <meta property="article:author" content="sunyanan">
-<meta property="article:tag" content="数据库">
+<meta property="article:tag" content="OpenGl">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/GraphicsPipeline.png">
   
   
   
-  <title>database - SunAndMoons</title>
+  <title>OpenGl - SunAndMoons</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -200,7 +202,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="database"></span>
+            <span id="subtitle" data-typed-text="OpenGl"></span>
           
         </div>
 
@@ -211,8 +213,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-12-02 11:03" pubdate>
-          2024年12月2日 上午
+        <time datetime="2024-12-03 14:11" pubdate>
+          2024年12月3日 下午
         </time>
       </span>
     
@@ -223,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          424 字
+          840 字
         
       </span>
     
@@ -234,7 +236,7 @@
         
         
         
-          4 分钟
+          8 分钟
         
       </span>
     
@@ -271,27 +273,22 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">database</h1>
+            <h1 id="seo-header">OpenGl</h1>
             
             
               <div class="markdown-body">
                 
-                <h4 id="1-事务的四大特性"><a href="#1-事务的四大特性" class="headerlink" title="1. 事务的四大特性"></a>1. 事务的四大特性</h4><ul>
-<li>原子性： 事务是最小的执行单位，不可分割。事务的原子性确保动作要全部执行，要么全部不执行。</li>
-<li>一致性：事务完成时，数据必须处于一致状态，多个事对于同一个数据读取的结果是相同的。</li>
-<li>隔离性：并发访问数据库时，一个事务不被其他事务所干扰，各个事务不干涉内部的数据。</li>
-<li>持久性：事务被提交后，对数据库中的数据改变时持久的。</li>
-</ul>
-<h4 id="2-事务之间的相互影响"><a href="#2-事务之间的相互影响" class="headerlink" title="2. 事务之间的相互影响"></a>2. 事务之间的相互影响</h4><ul>
-<li><p>脏读：一个事务读取了另一个事务未提交的数据</p>
-</li>
-<li><p>不可重复读（Non-repeatable Read），就是在一个事务范围内，两次相同的查询会返回两个不同的数据，这是因为在此间隔内有其他事务对数据进行了修改。</p>
-</li>
-<li><p>幻读（Phantom Read）<br>幻读是指当事务 不是独立执行时 发生的一种现象，例如有一个事务对表中的数据进行了修改，这种修改涉及到表中的全部数据行，同时，第一个事务也修改这个表中的数据，这种修改是向表中 插入一行新数据。那么，第一个事务的用户发现表中还有没有修改的数据行，就好像发生了幻觉一样。</p>
-</li>
-<li><p>丢失更新（Lost Update）两个事务同时读取同一条记录，事务 A 先修改记录，事务 B 也修改记录（B 是不知道 A 修改过），当 B 提交数据后， 其修改结果覆盖了 A 的修改结果，导致事务 A 更新丢失。</p>
-</li>
-</ul>
+                <h4 id="图形渲染管线"><a href="#图形渲染管线" class="headerlink" title="图形渲染管线"></a>图形渲染管线</h4><p>OpenGL的图形渲染管线（Graphics Pipeline，大多译为管线，实际上指的是一堆原始图形数据途经一个输送管道，期间经过各种变化处理最终出现在屏幕的过程）</p>
+<p>3D坐标转为2D坐标的处理过程是由OpenGL的图形渲染管线管理的。</p>
+<p>图形渲染管线可以被划分为两个主要部分：第一部分把你的3D坐标转换为2D坐标，第二部分是把2D坐标转变为实际的有颜色的像素。这个教程里，我们会简单地讨论一下图形渲染管线，以及如何利用它创建一些漂亮的像素。</p>
+<p>2D坐标和像素也是不同的，2D坐标精确表示一个点在2D空间中的位置，而2D像素是这个点的近似值，2D像素受到你的屏幕&#x2F;窗口分辨率的限制。</p>
+<p>图形渲染管线的第一个部分是顶点着色器(Vertex Shader)，它把一个单独的顶点作为输入。顶点着色器主要的目的是把3D坐标转为另一种3D坐标（后面会解释），同时顶点着色器允许我们对顶点属性进行一些基本处理。</p>
+<p>顶点着色器阶段的输出可以选择性地传递给几何着色器(Geometry Shader)。几何着色器将一组顶点作为输入，这些顶点形成图元，并且能够通过发出新的顶点来形成新的(或其他)图元来生成其他形状。在这个例子中，它从给定的形状中生成第二个三角形。</p>
+<p>图元装配(Primitive Assembly)阶段将顶点着色器（或几何着色器）输出的所有顶点作为输入（如果是GL_POINTS，那么就是一个顶点），并将所有的点装配成指定图元的形状；本节例子中是两个三角形。</p>
+<p>图元装配阶段的输出会被传入光栅化阶段(Rasterization Stage)，这里它会把图元映射为最终屏幕上相应的像素，生成供片段着色器(Fragment Shader)使用的片段(Fragment)。在片段着色器运行之前会执行裁切(Clipping)。裁切会丢弃超出你的视图以外的所有像素，用来提升执行效率。</p>
+<p>片段着色器的主要目的是计算一个像素的最终颜色，这也是所有OpenGL高级效果产生的地方。通常，片段着色器包含3D场景的数据（比如光照、阴影、光的颜色等等），这些数据可以被用来计算最终像素的颜色。</p>
+<p>在所有对应颜色值确定以后，最终的对象将会被传到最后一个阶段，我们叫做Alpha测试和混合(Blending)阶段。这个阶段检测片段的对应的深度（和模板(Stencil)）值（后面会讲），用它们来判断这个像素是其它物体的前面还是后面，决定是否应该丢弃。这个阶段也会检查alpha值（alpha值定义了一个物体的透明度）并对物体进行混合(Blend)。所以，即使在片段着色器中计算出来了一个像素输出的颜色，在渲染多个三角形的时候最后的像素颜色也可能完全不同。</p>
+<p><img src="/GraphicsPipeline.png" srcset="/img/loading.gif" lazyload alt="alt text"></p>
 
                 
               </div>
@@ -310,7 +307,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/cpp/" class="category-chain-item">cpp</a>
+  <a href="/categories/OpenGl/" class="category-chain-item">OpenGl</a>
   
   
 
@@ -325,7 +322,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="print-no-link">#数据库</a>
+        <a href="/tags/OpenGl/" class="print-no-link">#OpenGl</a>
       
     </div>
   
@@ -337,8 +334,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>database</div>
-      <div>http://example.com/2024/12/02/database/</div>
+      <div>OpenGl</div>
+      <div>http://example.com/2024/12/03/OpenGl/</div>
     </div>
     <div class="license-meta">
       
@@ -350,7 +347,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年12月2日</div>
+          <div>2024年12月3日</div>
         </div>
       
       
@@ -382,18 +379,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/12/03/OpenGl/" title="OpenGl">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">OpenGl</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/11/28/c-%E5%85%B3%E9%94%AE%E5%AD%97%E4%B8%8E%E5%85%B3%E9%94%AE%E5%BA%93%E5%87%BD%E6%95%B0/" title="c++关键字与关键库函数">
-                        <span class="hidden-mobile">c++关键字与关键库函数</span>
+                      <a href="/2024/12/02/database/" title="database">
+                        <span class="hidden-mobile">database</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
