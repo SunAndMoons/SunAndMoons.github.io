@@ -27,7 +27,7 @@
 <meta property="og:description" content="介绍智能指针的使用场景c++中的智能指针主要用于管理动态分配的内存，避免内存泄漏。c++11标准引入了三种主要的智能指针： std::unique_ptr、std::shared_ptr、std::weak_ptr。 1. std::unique_ptr独占所有权的智能指针，同一时间内只能有一个 unique_ptr 指向一个特定的对象，当unique_ptr被销毁时，它所指向的对象也会被销毁。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-10-06T15:16:49.000Z">
-<meta property="article:modified_time" content="2024-11-03T13:01:03.227Z">
+<meta property="article:modified_time" content="2024-12-05T05:10:26.807Z">
 <meta property="article:author" content="sunyanan">
 <meta property="article:tag" content="cpp">
 <meta name="twitter:card" content="summary_large_image">
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          851 字
+          957 字
         
       </span>
     
@@ -305,6 +305,11 @@
 <li>在使用shared_ptr时，一定要注意是否有循环引用的问题，会导致内存泄漏；</li>
 </ol>
 </blockquote>
+<p>重载操作符： <code>-&gt;</code> 、 <code>*</code></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><br><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">class</span> <span class="hljs-title class_">T</span>&gt;<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyUniquePtr</span><br>&#123;<br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-function"><span class="hljs-keyword">explicit</span> <span class="hljs-title">MyUniquePtr</span><span class="hljs-params">(T* p = <span class="hljs-literal">nullptr</span>)</span> </span>&#123;<br>		ptr = p;<br>	&#125;<br>	~<span class="hljs-built_in">MyUniquePtr</span>()<br>	&#123;<br>		<span class="hljs-built_in">delete</span> (ptr);<br>	&#125;<br><br>	<span class="hljs-built_in">MyUniquePtr</span>(<span class="hljs-type">const</span> MyUniquePtr&amp; rhs) = <span class="hljs-keyword">delete</span>;<br>	MyUniquePtr&amp; <span class="hljs-keyword">operator</span> =(<span class="hljs-type">const</span> MyUniquePtr&amp; rhs) = <span class="hljs-keyword">delete</span>;<br><br>	T* <span class="hljs-keyword">operator</span> -&gt;() &#123;<br>		<span class="hljs-keyword">return</span> ptr;<br>	&#125;<br>	T&amp; <span class="hljs-keyword">operator</span> *()<br>	&#123;<br>		<span class="hljs-keyword">return</span> *ptr;<br>	&#125;<br>	<br><br><span class="hljs-keyword">private</span>:<br>	T* ptr;<br>&#125;;<br><br></code></pre></td></tr></table></figure>
+
+
+<p>shared_ptr 中资源可以被多个指针共享，但多个指针指向同一个资源不能被释放多次，因此使用计数机制表明资源被几个指针共享。</p>
 
                 
               </div>
@@ -404,12 +409,6 @@
                   </article>
                   <article class="post-next col-6">
                     
-                    
-                      <a href="/2024/10/06/move/" title="move">
-                        <span class="hidden-mobile">move</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
                     
                   </article>
                 </div>
