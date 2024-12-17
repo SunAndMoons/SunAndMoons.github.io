@@ -19,21 +19,22 @@
   <meta name="author" content="sunyanan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="title: 其他date: 2024-12-12 16:22:07tags:postgis https:&#x2F;&#x2F;postgis.net&#x2F;workshops&#x2F;zh_Hans&#x2F;postgis-intro&#x2F; 空间索引https:&#x2F;&#x2F;www.cnblogs.com&#x2F;LBSer&#x2F;category&#x2F;575695.html https:&#x2F;&#x2F;www.cnblogs.com&#x2F;LBSer&#x2F;p&#x2F;3310455.html">
+    <meta name="description" content="1.介绍PostGis 是一个空间数据库，空间数据库在数据库中，可以像操作普通数据一样操作空间数据对象。 空间数据类型：点、线、面多维空间索引：提升空间数据处理的效率空间函数：用于处理空间属性和关系 1.1 空间索引与边界范围框普通的数据库提供 索引 ,便于快速和随机访问数据的子集。对于标准类型(数字、字符串、日期)的索引通常是使用 B-tree 索引进行。 B-tree 使用自然排序的顺序将数据">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SunAndMoons">
-<meta property="og:url" content="http://example.com/2024/12/12/%E5%85%B6%E4%BB%96/index.html">
+<meta property="og:title" content="PostGIS">
+<meta property="og:url" content="http://example.com/2024/12/12/PostGIS/index.html">
 <meta property="og:site_name" content="SunAndMoons">
-<meta property="og:description" content="title: 其他date: 2024-12-12 16:22:07tags:postgis https:&#x2F;&#x2F;postgis.net&#x2F;workshops&#x2F;zh_Hans&#x2F;postgis-intro&#x2F; 空间索引https:&#x2F;&#x2F;www.cnblogs.com&#x2F;LBSer&#x2F;category&#x2F;575695.html https:&#x2F;&#x2F;www.cnblogs.com&#x2F;LBSer&#x2F;p&#x2F;3310455.html">
+<meta property="og:description" content="1.介绍PostGis 是一个空间数据库，空间数据库在数据库中，可以像操作普通数据一样操作空间数据对象。 空间数据类型：点、线、面多维空间索引：提升空间数据处理的效率空间函数：用于处理空间属性和关系 1.1 空间索引与边界范围框普通的数据库提供 索引 ,便于快速和随机访问数据的子集。对于标准类型(数字、字符串、日期)的索引通常是使用 B-tree 索引进行。 B-tree 使用自然排序的顺序将数据">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-12-12T08:22:07.158Z">
-<meta property="article:modified_time" content="2024-12-17T06:59:50.476Z">
+<meta property="article:published_time" content="2024-12-12T12:14:46.000Z">
+<meta property="article:modified_time" content="2024-12-13T07:42:36.332Z">
 <meta property="article:author" content="sunyanan">
+<meta property="article:tag" content="Gis">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>SunAndMoons</title>
+  <title>PostGIS - SunAndMoons</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +200,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text=""></span>
+            <span id="subtitle" data-typed-text="PostGIS"></span>
           
         </div>
 
@@ -210,8 +211,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-12-12 16:22" pubdate>
-          2024年12月12日 下午
+        <time datetime="2024-12-12 20:14" pubdate>
+          2024年12月12日 晚上
         </time>
       </span>
     
@@ -222,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          49 字
+          550 字
         
       </span>
     
@@ -233,7 +234,7 @@
         
         
         
-          1 分钟
+          5 分钟
         
       </span>
     
@@ -270,18 +271,23 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header"></h1>
+            <h1 id="seo-header">PostGIS</h1>
             
             
               <div class="markdown-body">
                 
-                <hr>
-<h2 id="title-其他date-2024-12-12-16-22-07tags"><a href="#title-其他date-2024-12-12-16-22-07tags" class="headerlink" title="title: 其他date: 2024-12-12 16:22:07tags:"></a>title: 其他<br>date: 2024-12-12 16:22:07<br>tags:</h2><p>postgis</p>
-<p><a target="_blank" rel="noopener" href="https://postgis.net/workshops/zh_Hans/postgis-intro/">https://postgis.net/workshops/zh_Hans/postgis-intro/</a></p>
-<p>空间索引<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/LBSer/category/575695.html">https://www.cnblogs.com/LBSer/category/575695.html</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/LBSer/p/3310455.html">https://www.cnblogs.com/LBSer/p/3310455.html</a></p>
-<p>python conda 环境配置<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_73800108/article/details/137296446">https://blog.csdn.net/weixin_73800108/article/details/137296446</a></p>
-<p>软件 :<br>mobaxterm</p>
+                <h4 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.介绍"></a>1.介绍</h4><p>PostGis 是一个空间数据库，空间数据库在数据库中，可以像操作普通数据一样操作空间数据对象。</p>
+<p>空间数据类型：点、线、面<br>多维空间索引：提升空间数据处理的效率<br>空间函数：用于处理空间属性和关系</p>
+<h5 id="1-1-空间索引与边界范围框"><a href="#1-1-空间索引与边界范围框" class="headerlink" title="1.1 空间索引与边界范围框"></a>1.1 空间索引与边界范围框</h5><p>普通的数据库提供 <strong>索引</strong> ,便于快速和随机访问数据的子集。对于标准类型(数字、字符串、日期)的索引通常是使用 B-tree 索引进行。</p>
+<p>B-tree 使用自然排序的顺序将数据划分到层次树中。数字、字符串、日期的自然顺序排序很容易确定。</p>
+<p>但是对于多边形来说，可以重叠、包含、并且在空间中排列，因为无法使用B-tree有效进行索引。所以真正的空间数据库促成提供了  <strong>空间索引</strong> -&gt;<strong>哪些对象在这个特定的边界框内</strong>。</p>
+<p><strong>Bounding Box 边界框</strong> ：包含给定要素的最小矩形，与坐标轴平行。</p>
+<p>空间索引提供的是近似的结果。<br>常见的空间索引：R-tree、四叉树、网格索引、GeoHash。为了能够更有效的处理空间数据查询。</p>
+<p>GeoHash特别适合点数据，莫顿码；<br>线、面 采用R-tree更有优势。</p>
+<h5 id="1-2空间函数"><a href="#1-2空间函数" class="headerlink" title="1.2空间函数"></a>1.2空间函数</h5><p>普通数据库提供了一些 “函数”，连接字符串、对字符串进行哈希操作、对数据进行数学运算，以及从日期中提取信息。</p>
+<p>空间数据库提供了一系列的函数和方法，并处理空间数据类型。计算两个地理位置之间的距离，判断一个点是否在多边形内等。</p>
+<p>空间函数的类型：<br>    转换：几个数据和外部数据格式之间进行转换的函数<br>    管理：管理空间表和PostGIS管理信息的函数<br>    检索：几何数据的属性和测量值的函数<br>    比较：比较两个几个数据在空间关系上的函数<br>    生成：从其他几何生成新几何的函数。</p>
+<h5 id="1-3-PostGIS"><a href="#1-3-PostGIS" class="headerlink" title="1.3 PostGIS"></a>1.3 PostGIS</h5><p>通过对空间</p>
 
                 
               </div>
@@ -290,6 +296,34 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Gis/" class="category-chain-item">Gis</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Gis/" class="print-no-link">#Gis</a>
+      
+    </div>
   
 </div>
 
@@ -299,8 +333,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div></div>
-      <div>http://example.com/2024/12/12/其他/</div>
+      <div>PostGIS</div>
+      <div>http://example.com/2024/12/12/PostGIS/</div>
     </div>
     <div class="license-meta">
       
@@ -344,9 +378,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/12/12/PostGIS/" title="PostGIS">
+                      <a href="/2024/12/17/redis/" title="redis">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">PostGIS</span>
+                        <span class="hidden-mobile">redis</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -354,8 +388,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/12/11/c-I-O%E4%B8%8E%E8%BF%9B%E7%A8%8B%E5%90%8C%E6%AD%A5/" title="c++_I/O与进程同步">
-                        <span class="hidden-mobile">c++_I/O与进程同步</span>
+                      <a href="/2024/12/12/%E5%85%B6%E4%BB%96/" title="">
+                        <span class="hidden-mobile"></span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

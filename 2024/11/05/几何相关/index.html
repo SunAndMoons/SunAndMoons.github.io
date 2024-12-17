@@ -31,7 +31,7 @@
 <meta property="og:image" content="http://example.com/images/20200302210437662.png">
 <meta property="og:image" content="http://example.com/images/pointisinpolyon.png">
 <meta property="article:published_time" content="2024-11-05T09:08:20.000Z">
-<meta property="article:modified_time" content="2024-12-12T09:19:04.363Z">
+<meta property="article:modified_time" content="2024-12-16T08:28:06.587Z">
 <meta property="article:author" content="sunyanan">
 <meta property="article:tag" content="Gis">
 <meta name="twitter:card" content="summary_large_image">
@@ -228,7 +228,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2k 字
+          2.2k 字
         
       </span>
     
@@ -239,7 +239,7 @@
         
         
         
-          17 分钟
+          19 分钟
         
       </span>
     
@@ -350,6 +350,17 @@
 <h5 id="7-2-空间索引类型"><a href="#7-2-空间索引类型" class="headerlink" title="7.2 空间索引类型"></a>7.2 空间索引类型</h5><p>基于哈希的思想：网格索引；<br>基于树的思想：四叉树、R树等</p>
 <figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs brainfuck"><span class="hljs-literal">-</span><span class="hljs-comment">索引</span><br><span class="hljs-literal">--</span><span class="hljs-comment">哈希</span><span class="hljs-literal">-</span><span class="hljs-comment">网格索引</span><br><span class="hljs-literal">--</span><span class="hljs-comment">树</span><span class="hljs-literal">--</span><span class="hljs-comment">四叉树、R树等</span><br></code></pre></td></tr></table></figure>
 
+<p>RTree相关：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/wzf1993/article/details/79547037">https://blog.csdn.net/wzf1993/article/details/79547037</a></p>
+<p>二维：最小限定矩形： minimum bounding retangle<br>三维：最小限定箱： minimum bounding boxs</p>
+<p>通过索引操作对象的MBB</p>
+<p>filtering:筛选过滤<br>refinement: 进一步精确</p>
+<p>R树：<br>B&#x2F;B+&#x2F;B-树是线性的，索引一维数据</p>
+<p>R树：用来存储高维数据的平衡树</p>
+<p>线段：一维空间分割<br>区域:二维空间<br>几何空间：三维</p>
+<p>叶子节点：多个指向不同数据的指针</p>
+<p>postGis 创建表</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> geometries (name <span class="hljs-type">varchar</span>, geom geometry);<br><br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> geometries <span class="hljs-keyword">VALUES</span><br>  (<span class="hljs-string">&#x27;Point&#x27;</span>, <span class="hljs-string">&#x27;POINT(0 0)&#x27;</span>),<br>  (<span class="hljs-string">&#x27;Linestring&#x27;</span>, <span class="hljs-string">&#x27;LINESTRING(0 0, 1 1, 2 1, 2 2)&#x27;</span>),<br>  (<span class="hljs-string">&#x27;Polygon&#x27;</span>, <span class="hljs-string">&#x27;POLYGON((0 0, 1 0, 1 1, 0 1, 0 0))&#x27;</span>),<br>  (<span class="hljs-string">&#x27;PolygonWithHole&#x27;</span>, <span class="hljs-string">&#x27;POLYGON((0 0, 10 0, 10 10, 0 10, 0 0),(1 1, 1 2, 2 2, 2 1, 1 1))&#x27;</span>),<br>  (<span class="hljs-string">&#x27;Collection&#x27;</span>, <span class="hljs-string">&#x27;GEOMETRYCOLLECTION(POINT(2 0),POLYGON((0 0, 1 0, 1 1, 0 1, 0 0)))&#x27;</span>);<br><br><span class="hljs-keyword">SELECT</span> name, ST_AsText(geom) <span class="hljs-keyword">FROM</span> geometries;<br></code></pre></td></tr></table></figure>
 
 
                 
